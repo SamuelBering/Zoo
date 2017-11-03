@@ -22,6 +22,18 @@ namespace Zoo.DBContext
         public virtual DbSet<Environment> Environments { get; set; }
         public virtual DbSet<Spieces> Spieces { get; set; }
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Animal>().HasMany(a => a.Parents).WithMany()
+                .Map(m =>
+                {
+                    m.MapLeftKey("ChildAnimalId");
+                    m.MapRightKey("ParentAnimalId");
+                    m.ToTable("ChildParentAnimals");
+                }
+                );
+        }
+
 
         // Add a DbSet for each entity type that you want to include in your model. For more information 
         // on configuring and using a Code First model, see http://go.microsoft.com/fwlink/?LinkId=390109.

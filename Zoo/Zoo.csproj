@@ -71,6 +71,18 @@
     <Compile Include="Migrations\201711031254462_AddAllEmptyClassesFixed.Designer.cs">
       <DependentUpon>201711031254462_AddAllEmptyClassesFixed.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711031305153_AddParentsPropToAnimal.cs" />
+    <Compile Include="Migrations\201711031305153_AddParentsPropToAnimal.Designer.cs">
+      <DependentUpon>201711031305153_AddParentsPropToAnimal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711031314502_ConfigureAnimalEntityWithManyToMany.cs" />
+    <Compile Include="Migrations\201711031314502_ConfigureAnimalEntityWithManyToMany.Designer.cs">
+      <DependentUpon>201711031314502_ConfigureAnimalEntityWithManyToMany.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711031324435_AdjustNamesForChildParentAnimalsJoinTable.cs" />
+    <Compile Include="Migrations\201711031324435_AdjustNamesForChildParentAnimalsJoinTable.Designer.cs">
+      <DependentUpon>201711031324435_AdjustNamesForChildParentAnimalsJoinTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="UI\ZooForm.cs">
       <SubType>Form</SubType>
@@ -88,6 +100,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711031254462_AddAllEmptyClassesFixed.resx">
       <DependentUpon>201711031254462_AddAllEmptyClassesFixed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711031305153_AddParentsPropToAnimal.resx">
+      <DependentUpon>201711031305153_AddParentsPropToAnimal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711031314502_ConfigureAnimalEntityWithManyToMany.resx">
+      <DependentUpon>201711031314502_ConfigureAnimalEntityWithManyToMany.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711031324435_AdjustNamesForChildParentAnimalsJoinTable.resx">
+      <DependentUpon>201711031324435_AdjustNamesForChildParentAnimalsJoinTable.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
