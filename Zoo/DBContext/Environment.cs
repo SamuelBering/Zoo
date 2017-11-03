@@ -12,5 +12,9 @@ namespace Zoo.DBContext
     {
         public int EnvironmentId { get; set; }
 
+        public virtual string Name { get; set; }
+
+        public virtual ICollection<Animal> Animals { get; set; }
+
     }
 }

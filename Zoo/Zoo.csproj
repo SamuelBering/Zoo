@@ -83,6 +83,18 @@
     <Compile Include="Migrations\201711031324435_AdjustNamesForChildParentAnimalsJoinTable.Designer.cs">
       <DependentUpon>201711031324435_AdjustNamesForChildParentAnimalsJoinTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711031346201_AddSpicesPropAndCountryOfOriginPropAndEnvironmentPropToAnimal.cs" />
+    <Compile Include="Migrations\201711031346201_AddSpicesPropAndCountryOfOriginPropAndEnvironmentPropToAnimal.Designer.cs">
+      <DependentUpon>201711031346201_AddSpicesPropAndCountryOfOriginPropAndEnvironmentPropToAnimal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711031357570_AddTheRestOfPropertisToDBmodelClasses.cs" />
+    <Compile Include="Migrations\201711031357570_AddTheRestOfPropertisToDBmodelClasses.Designer.cs">
+      <DependentUpon>201711031357570_AddTheRestOfPropertisToDBmodelClasses.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711031430190_ChangeToVirtualPropertiesInAllDBModelClasses.cs" />
+    <Compile Include="Migrations\201711031430190_ChangeToVirtualPropertiesInAllDBModelClasses.Designer.cs">
+      <DependentUpon>201711031430190_ChangeToVirtualPropertiesInAllDBModelClasses.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="UI\ZooForm.cs">
       <SubType>Form</SubType>
@@ -109,6 +121,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711031324435_AdjustNamesForChildParentAnimalsJoinTable.resx">
       <DependentUpon>201711031324435_AdjustNamesForChildParentAnimalsJoinTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711031346201_AddSpicesPropAndCountryOfOriginPropAndEnvironmentPropToAnimal.resx">
+      <DependentUpon>201711031346201_AddSpicesPropAndCountryOfOriginPropAndEnvironmentPropToAnimal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711031357570_AddTheRestOfPropertisToDBmodelClasses.resx">
+      <DependentUpon>201711031357570_AddTheRestOfPropertisToDBmodelClasses.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711031430190_ChangeToVirtualPropertiesInAllDBModelClasses.resx">
+      <DependentUpon>201711031430190_ChangeToVirtualPropertiesInAllDBModelClasses.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
