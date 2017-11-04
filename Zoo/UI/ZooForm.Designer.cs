@@ -28,20 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.resulutDataGridView = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.resulutDataGridView)).BeginInit();
             this.SuspendLayout();
+            // 
+            // resulutDataGridView
+            // 
+            this.resulutDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.resulutDataGridView.Location = new System.Drawing.Point(104, 95);
+            this.resulutDataGridView.Name = "resulutDataGridView";
+            this.resulutDataGridView.RowTemplate.Height = 24;
+            this.resulutDataGridView.Size = new System.Drawing.Size(804, 262);
+            this.resulutDataGridView.TabIndex = 0;
             // 
             // ZooForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(282, 253);
+            this.ClientSize = new System.Drawing.Size(998, 468);
+            this.Controls.Add(this.resulutDataGridView);
             this.Name = "ZooForm";
             this.Text = "Zoo";
+            ((System.ComponentModel.ISupportInitialize)(this.resulutDataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.DataGridView resulutDataGridView;
     }
 }
 

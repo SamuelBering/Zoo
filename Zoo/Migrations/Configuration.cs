@@ -20,6 +20,7 @@ namespace Zoo.Migrations
             {
                 Name = "Benny",
                 Type = "växtätare",
+                Weight=2700,
                 CountryOfOrigin = new CountryOfOrigin
                 {
                     Name = "Sydafrika"
@@ -47,6 +48,7 @@ namespace Zoo.Migrations
             {
                 Name = "Kickan",
                 Type = "växtätare",
+                Weight = 1600,
                 CountryOfOrigin = benny.CountryOfOrigin,
                 Environment = benny.Environment,
                 Spieces = benny.Spieces,

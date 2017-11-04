@@ -54,6 +54,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BL\IZoo.cs" />
+    <Compile Include="DAL\DataAccess.cs" />
+    <Compile Include="DAL\IDataAccess.cs" />
     <Compile Include="DBContext\Animal.cs" />
     <Compile Include="DBContext\CountryOfOrigin.cs" />
     <Compile Include="DBContext\Environment.cs" />
@@ -95,7 +98,13 @@
     <Compile Include="Migrations\201711031430190_ChangeToVirtualPropertiesInAllDBModelClasses.Designer.cs">
       <DependentUpon>201711031430190_ChangeToVirtualPropertiesInAllDBModelClasses.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711040629544_AddWeightPropToAnimal.cs" />
+    <Compile Include="Migrations\201711040629544_AddWeightPropToAnimal.Designer.cs">
+      <DependentUpon>201711040629544_AddWeightPropToAnimal.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="BL\Zoo.cs" />
+    <Compile Include="ViewModels\Animal.cs" />
     <Compile Include="UI\ZooForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -131,6 +140,9 @@
     <EmbeddedResource Include="Migrations\201711031430190_ChangeToVirtualPropertiesInAllDBModelClasses.resx">
       <DependentUpon>201711031430190_ChangeToVirtualPropertiesInAllDBModelClasses.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711040629544_AddWeightPropToAnimal.resx">
+      <DependentUpon>201711040629544_AddWeightPropToAnimal.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -158,8 +170,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="BL\" />
-    <Folder Include="DAL\" />
+    <Content Include="Inlämningsuppgift2.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

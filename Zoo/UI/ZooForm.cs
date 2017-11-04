@@ -7,14 +7,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Zoo.BL;
 
 namespace Zoo
 {
     public partial class ZooForm : Form
     {
-        public ZooForm()
+        IZoo zoo;
+
+        public ZooForm(IZoo zoo)
         {
+            this.zoo = zoo;
             InitializeComponent();
+            LoadAllAnimals();
+        }
+
+        private void LoadAllAnimals()
+        {
+            resulutDataGridView.DataSource = zoo.GetAllAnimals();
         }
     }
 }

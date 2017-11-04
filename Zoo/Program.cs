@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using Zoo.DAL;
 
 namespace Zoo
 {
@@ -16,7 +14,10 @@ namespace Zoo
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ZooForm());
+
+            DataAccess dataAcces = new DataAccess();
+            Zoo.BL.Zoo zoo = new Zoo.BL.Zoo(dataAcces);            
+            Application.Run(new ZooForm(zoo));
         }
     }
 }
