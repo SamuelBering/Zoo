@@ -20,7 +20,7 @@ namespace Zoo.Migrations
             {
                 Name = "Benny",
                 Type = "växtätare",
-                Weight=2700,
+                Weight = 2700,
                 CountryOfOrigin = new CountryOfOrigin
                 {
                     Name = "Sydafrika"
@@ -48,15 +48,43 @@ namespace Zoo.Migrations
             {
                 Name = "Kickan",
                 Type = "växtätare",
-                Weight = 1600,
+                Weight = 1666,
                 CountryOfOrigin = benny.CountryOfOrigin,
                 Environment = benny.Environment,
                 Spieces = benny.Spieces,
-                Parents = new List<Animal> { benny }
             };
 
-
             context.Animals.AddOrUpdate(a => a.Name, elephant2);
+            context.SaveChanges();
+
+            var kickan = (from e in context.Animals
+                         where e.Name == "Kickan"
+                         select e).SingleOrDefault();
+
+
+            Animal elephant3 = new Animal
+            {
+                Name = "Benjamin",
+                Type = "växtätare",
+                Weight = 3100,
+                CountryOfOrigin = benny.CountryOfOrigin,
+                Environment = benny.Environment,
+                Spieces = benny.Spieces,
+            };
+
+            context.Animals.AddOrUpdate(a => a.Name, elephant3);
+            context.SaveChanges();
+
+            var benjamin = (from e in context.Animals
+                            where e.Name == "Benjamin"
+                            select e).SingleOrDefault();
+
+
+            kickan.Parents.Add(benny);
+            kickan.Parents.Add(benjamin);
+            context.SaveChanges();
+
+
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
