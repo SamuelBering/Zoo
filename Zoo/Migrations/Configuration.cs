@@ -58,8 +58,8 @@ namespace Zoo.Migrations
             context.SaveChanges();
 
             var kickan = (from e in context.Animals
-                         where e.Name == "Kickan"
-                         select e).SingleOrDefault();
+                          where e.Name == "Kickan"
+                          select e).SingleOrDefault();
 
 
             Animal elephant3 = new Animal
@@ -82,6 +82,12 @@ namespace Zoo.Migrations
 
             kickan.Parents.Add(benny);
             kickan.Parents.Add(benjamin);
+
+            context.Environments.AddOrUpdate(e => e.Name,
+                new DBContext.Environment { Name = "träd" },
+                new DBContext.Environment { Name = "vatten" }
+                );
+
             context.SaveChanges();
 
 

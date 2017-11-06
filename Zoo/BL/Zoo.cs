@@ -3,6 +3,7 @@ using Zoo.DBContext;
 using System.Linq;
 using Zoo.DAL;
 using Zoo.BL;
+using Zoo.ViewModels;
 
 namespace Zoo.BL
 {
@@ -18,6 +19,13 @@ namespace Zoo.BL
         public BindingList<ViewModels.Animal> GetAllAnimals()
         {
             return dataAccess.GetAllAnimals();
+        }
+
+        public BindingList<ViewModels.Environment> GetAllEnvironments()
+        {
+            var environments = dataAccess.GetAllEnvironments();
+            environments.Insert(0, new ViewModels.Environment { Id = -1, Name = "" });
+            return environments;
         }
     }
 }

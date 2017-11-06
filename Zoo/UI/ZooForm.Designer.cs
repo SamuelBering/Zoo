@@ -29,6 +29,12 @@
         private void InitializeComponent()
         {
             this.resulutDataGridView = new System.Windows.Forms.DataGridView();
+            this.environmentComboBox = new System.Windows.Forms.ComboBox();
+            this.typeComboBox = new System.Windows.Forms.ComboBox();
+            this.spiecesTextBox = new System.Windows.Forms.TextBox();
+            this.environmentLabel = new System.Windows.Forms.Label();
+            this.typeLabel = new System.Windows.Forms.Label();
+            this.spiecesLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.resulutDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -41,22 +47,90 @@
             this.resulutDataGridView.Size = new System.Drawing.Size(804, 262);
             this.resulutDataGridView.TabIndex = 0;
             // 
+            // environmentComboBox
+            // 
+            this.environmentComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.environmentComboBox.FormattingEnabled = true;
+            this.environmentComboBox.Location = new System.Drawing.Point(104, 50);
+            this.environmentComboBox.Name = "environmentComboBox";
+            this.environmentComboBox.Size = new System.Drawing.Size(194, 24);
+            this.environmentComboBox.TabIndex = 1;
+            // 
+            // typeComboBox
+            // 
+            this.typeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.typeComboBox.FormattingEnabled = true;
+            this.typeComboBox.Items.AddRange(new object[] {
+            "köttätare",
+            "växtätare"});
+            this.typeComboBox.Location = new System.Drawing.Point(330, 50);
+            this.typeComboBox.Name = "typeComboBox";
+            this.typeComboBox.Size = new System.Drawing.Size(164, 24);
+            this.typeComboBox.TabIndex = 2;
+            // 
+            // spiecesTextBox
+            // 
+            this.spiecesTextBox.Location = new System.Drawing.Point(519, 52);
+            this.spiecesTextBox.Name = "spiecesTextBox";
+            this.spiecesTextBox.Size = new System.Drawing.Size(180, 22);
+            this.spiecesTextBox.TabIndex = 3;
+            // 
+            // environmentLabel
+            // 
+            this.environmentLabel.AutoSize = true;
+            this.environmentLabel.Location = new System.Drawing.Point(101, 27);
+            this.environmentLabel.Name = "environmentLabel";
+            this.environmentLabel.Size = new System.Drawing.Size(79, 17);
+            this.environmentLabel.TabIndex = 4;
+            this.environmentLabel.Text = "Enviroment";
+            // 
+            // typeLabel
+            // 
+            this.typeLabel.AutoSize = true;
+            this.typeLabel.Location = new System.Drawing.Point(327, 27);
+            this.typeLabel.Name = "typeLabel";
+            this.typeLabel.Size = new System.Drawing.Size(40, 17);
+            this.typeLabel.TabIndex = 5;
+            this.typeLabel.Text = "Type";
+            // 
+            // spiecesLabel
+            // 
+            this.spiecesLabel.AutoSize = true;
+            this.spiecesLabel.Location = new System.Drawing.Point(516, 27);
+            this.spiecesLabel.Name = "spiecesLabel";
+            this.spiecesLabel.Size = new System.Drawing.Size(58, 17);
+            this.spiecesLabel.TabIndex = 6;
+            this.spiecesLabel.Text = "Spieces";
+            // 
             // ZooForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(998, 468);
+            this.Controls.Add(this.spiecesLabel);
+            this.Controls.Add(this.typeLabel);
+            this.Controls.Add(this.environmentLabel);
+            this.Controls.Add(this.spiecesTextBox);
+            this.Controls.Add(this.typeComboBox);
+            this.Controls.Add(this.environmentComboBox);
             this.Controls.Add(this.resulutDataGridView);
             this.Name = "ZooForm";
             this.Text = "Zoo";
             ((System.ComponentModel.ISupportInitialize)(this.resulutDataGridView)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.DataGridView resulutDataGridView;
+        private System.Windows.Forms.ComboBox environmentComboBox;
+        private System.Windows.Forms.ComboBox typeComboBox;
+        private System.Windows.Forms.TextBox spiecesTextBox;
+        private System.Windows.Forms.Label environmentLabel;
+        private System.Windows.Forms.Label typeLabel;
+        private System.Windows.Forms.Label spiecesLabel;
     }
 }
 

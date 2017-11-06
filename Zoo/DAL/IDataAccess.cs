@@ -10,5 +10,7 @@ namespace Zoo.DAL
     public interface IDataAccess
     {
         BindingList<ViewModels.Animal> GetAllAnimals();
+
+        BindingList<ViewModels.Environment> GetAllEnvironments();
     }
 }

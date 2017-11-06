@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Linq;
 using Zoo.DBContext;
+using Zoo.ViewModels;
 
 namespace Zoo.DAL
 {
@@ -49,5 +50,24 @@ namespace Zoo.DAL
             return animals;
         }
 
+        public BindingList<ViewModels.Environment> GetAllEnvironments()
+        {
+            BindingList<ViewModels.Environment> environments;
+
+            using (var db = new ZooContext())
+            {
+
+                var query = from e in db.Environments
+                            select new ViewModels.Environment
+                            {
+                                Id=e.EnvironmentId,
+                                Name=e.Name
+                            };
+
+                environments = new BindingList<ViewModels.Environment>(query.ToList());
+            }
+
+            return environments;
+        }
     }
 }
