@@ -9,5 +9,7 @@ namespace Zoo.BL
 
         BindingList<ViewModels.Environment> GetAllEnvironments();
 
+        BindingList<ViewModels.Animal> GetAnimals(string enviroment, string type, string spieces);
+
     }
 }

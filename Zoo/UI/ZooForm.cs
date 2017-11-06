@@ -33,6 +33,14 @@ namespace Zoo
             environmentComboBox.ValueMember = "Name";
         }
 
+        private void searchButton_Click(object sender, EventArgs e)
+        {
+            string environment = (string)environmentComboBox.SelectedValue;
+            string type = typeComboBox.Text;
+            string spieces = spiecesTextBox.Text;
+            resulutDataGridView.DataSource = zoo.GetAnimals(environment, type, spieces);
+        }
+
         //private void TestAddAnimalsToDB()
         //{
         //    using (var context = new ZooContext())

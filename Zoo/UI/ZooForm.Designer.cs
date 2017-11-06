@@ -35,6 +35,7 @@
             this.environmentLabel = new System.Windows.Forms.Label();
             this.typeLabel = new System.Windows.Forms.Label();
             this.spiecesLabel = new System.Windows.Forms.Label();
+            this.searchButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.resulutDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,6 +62,7 @@
             this.typeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.typeComboBox.FormattingEnabled = true;
             this.typeComboBox.Items.AddRange(new object[] {
+            "",
             "köttätare",
             "växtätare"});
             this.typeComboBox.Location = new System.Drawing.Point(330, 50);
@@ -102,11 +104,22 @@
             this.spiecesLabel.TabIndex = 6;
             this.spiecesLabel.Text = "Spieces";
             // 
+            // searchButton
+            // 
+            this.searchButton.Location = new System.Drawing.Point(769, 44);
+            this.searchButton.Name = "searchButton";
+            this.searchButton.Size = new System.Drawing.Size(139, 39);
+            this.searchButton.TabIndex = 7;
+            this.searchButton.Text = "Search";
+            this.searchButton.UseVisualStyleBackColor = true;
+            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
+            // 
             // ZooForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(998, 468);
+            this.Controls.Add(this.searchButton);
             this.Controls.Add(this.spiecesLabel);
             this.Controls.Add(this.typeLabel);
             this.Controls.Add(this.environmentLabel);
@@ -131,6 +144,7 @@
         private System.Windows.Forms.Label environmentLabel;
         private System.Windows.Forms.Label typeLabel;
         private System.Windows.Forms.Label spiecesLabel;
+        private System.Windows.Forms.Button searchButton;
     }
 }
 

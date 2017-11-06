@@ -27,5 +27,11 @@ namespace Zoo.BL
             environments.Insert(0, new ViewModels.Environment { Id = -1, Name = "" });
             return environments;
         }
+
+        public BindingList<ViewModels.Animal> GetAnimals(string enviroment, string type, string spieces)
+        {
+            return dataAccess.GetAnimals(enviroment, type, spieces);
+        }
+
     }
 }

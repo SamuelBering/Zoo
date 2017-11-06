@@ -12,5 +12,7 @@ namespace Zoo.DAL
         BindingList<ViewModels.Animal> GetAllAnimals();
 
         BindingList<ViewModels.Environment> GetAllEnvironments();
+
+        BindingList<ViewModels.Animal> GetAnimals(string enviroment, string type, string spieces);
     }
 }
