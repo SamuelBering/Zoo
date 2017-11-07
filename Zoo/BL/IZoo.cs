@@ -11,5 +11,7 @@ namespace Zoo.BL
 
         BindingList<ViewModels.Animal> GetAnimals(string enviroment, string type, string spieces);
 
+        int AddNewAnimal(ViewModels.Animal animal);
+
     }
 }

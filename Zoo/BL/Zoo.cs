@@ -16,6 +16,11 @@ namespace Zoo.BL
             this.dataAccess = dataAccess;
         }
 
+        public int AddNewAnimal(ViewModels.Animal animal)
+        {
+            return dataAccess.AddNewAnimal(animal);
+        }
+
         public BindingList<ViewModels.Animal> GetAllAnimals()
         {
             return dataAccess.GetAllAnimals();

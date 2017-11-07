@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.resulutDataGridView = new System.Windows.Forms.DataGridView();
+            this.resultDataGridView = new System.Windows.Forms.DataGridView();
             this.environmentComboBox = new System.Windows.Forms.ComboBox();
             this.typeComboBox = new System.Windows.Forms.ComboBox();
             this.spiecesTextBox = new System.Windows.Forms.TextBox();
@@ -36,17 +36,18 @@
             this.typeLabel = new System.Windows.Forms.Label();
             this.spiecesLabel = new System.Windows.Forms.Label();
             this.searchButton = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.resulutDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.resultDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
-            // resulutDataGridView
+            // resultDataGridView
             // 
-            this.resulutDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.resulutDataGridView.Location = new System.Drawing.Point(104, 95);
-            this.resulutDataGridView.Name = "resulutDataGridView";
-            this.resulutDataGridView.RowTemplate.Height = 24;
-            this.resulutDataGridView.Size = new System.Drawing.Size(804, 262);
-            this.resulutDataGridView.TabIndex = 0;
+            this.resultDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.resultDataGridView.Location = new System.Drawing.Point(104, 95);
+            this.resultDataGridView.Name = "resultDataGridView";
+            this.resultDataGridView.RowTemplate.Height = 24;
+            this.resultDataGridView.Size = new System.Drawing.Size(804, 262);
+            this.resultDataGridView.TabIndex = 0;
+            this.resultDataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.resultDataGridView_CellEndEdit);
             // 
             // environmentComboBox
             // 
@@ -126,10 +127,10 @@
             this.Controls.Add(this.spiecesTextBox);
             this.Controls.Add(this.typeComboBox);
             this.Controls.Add(this.environmentComboBox);
-            this.Controls.Add(this.resulutDataGridView);
+            this.Controls.Add(this.resultDataGridView);
             this.Name = "ZooForm";
             this.Text = "Zoo";
-            ((System.ComponentModel.ISupportInitialize)(this.resulutDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.resultDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -137,7 +138,7 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView resulutDataGridView;
+        private System.Windows.Forms.DataGridView resultDataGridView;
         private System.Windows.Forms.ComboBox environmentComboBox;
         private System.Windows.Forms.ComboBox typeComboBox;
         private System.Windows.Forms.TextBox spiecesTextBox;

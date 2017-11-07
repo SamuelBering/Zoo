@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Windows.Forms;
 using Zoo.BL;
-using Zoo.DBContext;
+//using Zoo.DBContext;
 using System.Linq;
 using System.Collections.Generic;
-using System.Data.Entity.Migrations;
+using Zoo.ViewModels;
+//using System.Data.Entity.Migrations;
 
 
 namespace Zoo
@@ -23,7 +24,7 @@ namespace Zoo
 
         private void LoadAllAnimals()
         {
-            resulutDataGridView.DataSource = zoo.GetAllAnimals();
+            resultDataGridView.DataSource = zoo.GetAllAnimals();
         }
 
         private void LoadAllEnvironments()
@@ -38,8 +39,67 @@ namespace Zoo
             string environment = (string)environmentComboBox.SelectedValue;
             string type = typeComboBox.Text;
             string spieces = spiecesTextBox.Text;
-            resulutDataGridView.DataSource = zoo.GetAnimals(environment, type, spieces);
+            resultDataGridView.DataSource = zoo.GetAnimals(environment, type, spieces);
         }
+
+        private void resultDataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            var newValue = resultDataGridView[e.ColumnIndex, e.RowIndex].Value;
+            var columnName = resultDataGridView.Columns[e.ColumnIndex].HeaderText.ToLower();
+
+            if ((int)resultDataGridView[0, e.RowIndex].Value == 0)
+            {
+                Animal animal = null;
+
+                switch (columnName)
+                {
+                    case "name":
+                        animal = new Animal
+                        {
+                            Name = (string)newValue
+                        };
+                        resultDataGridView[0, e.RowIndex].Value = zoo.AddNewAnimal(animal);
+                        break;
+
+                    case "weight":
+                        animal = new Animal
+                        {
+                            Name = "Ny",
+                            Weight = (int)newValue
+                        };
+                        zoo.AddNewAnimal(animal);
+                        break;
+                    case "spieces":
+                        animal = new Animal
+                        {
+                            Name = "Ny",
+                            Spieces = (string)newValue
+                        };
+                        zoo.AddNewAnimal(animal);
+                        break;
+                    case "countryoforigin":
+                        animal = new Animal
+                        {
+                            Name = "Ny",
+                            CountryOfOrigin = (string)newValue
+                        };
+                        zoo.AddNewAnimal(animal);
+                        break;
+                }
+            }
+        }
+
+        //private void resulutDataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    /*  OM current row är större än rowcount
+        //     *     skapa en viewmodel.animal av aktuell row
+        //     *     call AddNewAnimal(viewAnimal)
+        //     *     
+        //     *  
+        //    */
+
+        //   
+        //}
 
         //private void TestAddAnimalsToDB()
         //{
