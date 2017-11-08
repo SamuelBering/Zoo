@@ -122,13 +122,34 @@ namespace Zoo
             foreach (var item in this.typeComboBox.Items)
                 dropDownListForm.DropDownComboBox.Items.Add(item);
 
+            dropDownListForm.DropDownComboBox.Text = (string)dataGridView[e.ColumnIndex, e.RowIndex].Value;
+
             if (dropDownListForm.ShowDialog(this) == DialogResult.OK)
             {
                 var selectedItem = dropDownListForm.DropDownComboBox.SelectedItem;
                 animal.Type = (string)selectedItem;
             }
-            else
+
+            dropDownListForm.Dispose();
+        }
+
+        private void GetEnvironmentAndUpdateAnimal(DataGridView dataGridView, DataGridViewCellEventArgs e,
+                                         Animal animal)
+        {
+            DropDownListForm dropDownListForm = new DropDownListForm();
+
+            foreach (var item in this.environmentComboBox.Items)
+                dropDownListForm.DropDownComboBox.Items.Add(item);
+
+            dropDownListForm.DropDownComboBox.DisplayMember = "Name";
+            dropDownListForm.DropDownComboBox.ValueMember = "Name";
+            dropDownListForm.DropDownComboBox.Text = (string)dataGridView[e.ColumnIndex, e.RowIndex].Value;
+            if (dropDownListForm.ShowDialog(this) == DialogResult.OK)
             {
+                ViewModels.Environment selectedEnvironment =
+                    (ViewModels.Environment)dropDownListForm.DropDownComboBox.SelectedItem;
+
+                animal.Environment = selectedEnvironment.Name;
             }
 
             dropDownListForm.Dispose();
@@ -156,9 +177,13 @@ namespace Zoo
 
                 Animal animal = (Animal)dataGridView.Rows[e.RowIndex].DataBoundItem;
 
-                if (columnName == "type")                
+                if (columnName == "type")
                     GetTypeAndUpdateAnimal(dataGridView, e, animal);
-                
+                else if (columnName == "environment")
+                    GetEnvironmentAndUpdateAnimal(dataGridView, e, animal);
+
+
+
             }
 
         }
