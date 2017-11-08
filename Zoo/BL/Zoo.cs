@@ -39,5 +39,11 @@ namespace Zoo.BL
             return dataAccess.GetAnimals(enviroment, type, spieces);
         }
 
+        public void RemoveAnimal(ViewModels.Animal animal)
+        {
+            dataAccess.RemoveAnimal(animal);
+        }
+
+
     }
 }

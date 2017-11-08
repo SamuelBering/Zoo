@@ -13,5 +13,7 @@ namespace Zoo.BL
 
         int AddOrUpdateAnimal(ViewModels.Animal animal);
 
+        void RemoveAnimal(ViewModels.Animal animal);
+
     }
 }

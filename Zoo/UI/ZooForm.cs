@@ -45,13 +45,17 @@ namespace Zoo
             environmentComboBox.ValueMember = "Name";
         }
 
-        private void searchButton_Click(object sender, EventArgs e)
+        private void UpdateDataGridViewWithFilterResults()
         {
             string environment = (string)environmentComboBox.SelectedValue;
             string type = typeComboBox.Text;
             string spieces = spiecesTextBox.Text;
             resultDataGridView.DataSource = zoo.GetAnimals(environment, type, spieces);
             InitializeResultDataGridColumns();
+        }
+        private void searchButton_Click(object sender, EventArgs e)
+        {
+            UpdateDataGridViewWithFilterResults();
         }
 
         private void AddNewAnimalFromNameWeightSpiecesOrCountry(DataGridView dataGridView,
@@ -233,6 +237,9 @@ namespace Zoo
 
         private void resultDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.ColumnIndex < 0)
+                return;
+
             DataGridView dataGridView = (DataGridView)sender;
 
             var columnName = dataGridView.Columns[e.ColumnIndex].HeaderText.ToLower();
@@ -266,6 +273,23 @@ namespace Zoo
                 dataGridView[0, e.RowIndex].Value = zoo.AddOrUpdateAnimal(animal);
             }
 
+        }
+
+        private void deleteRowButton_Click(object sender, EventArgs e)
+        {
+            if (resultDataGridView.SelectedRows.Count > 0)
+            {
+                for (int i = 0; i < resultDataGridView.Rows.Count; i++)
+                {
+                    if (resultDataGridView.Rows[i].Selected)
+                    {
+                        Animal animal = (Animal)resultDataGridView.Rows[i].DataBoundItem;
+                        zoo.RemoveAnimal(animal);
+
+                        UpdateDataGridViewWithFilterResults();
+                    }
+                }
+            }
         }
     }
 }

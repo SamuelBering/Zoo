@@ -70,6 +70,17 @@ namespace Zoo.DAL
             return animals;
         }
 
+        public void RemoveAnimal(ViewModels.Animal animal)
+        {
+            using (var db = new ZooContext())
+            {
+                var animalToRemove = new Animal { AnimalId = animal.Id };
+                db.Animals.Attach(animalToRemove);
+                db.Animals.Remove(animalToRemove);
+                db.SaveChanges();
+            }
+        }
+
         public BindingList<ViewModels.Animal> GetAllAnimals()
         {
             return GetAnimals("", "", "");

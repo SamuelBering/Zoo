@@ -36,6 +36,7 @@
             this.typeLabel = new System.Windows.Forms.Label();
             this.spiecesLabel = new System.Windows.Forms.Label();
             this.searchButton = new System.Windows.Forms.Button();
+            this.deleteRowButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.resultDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -116,11 +117,22 @@
             this.searchButton.UseVisualStyleBackColor = true;
             this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
             // 
+            // deleteRowButton
+            // 
+            this.deleteRowButton.Location = new System.Drawing.Point(914, 95);
+            this.deleteRowButton.Name = "deleteRowButton";
+            this.deleteRowButton.Size = new System.Drawing.Size(102, 43);
+            this.deleteRowButton.TabIndex = 8;
+            this.deleteRowButton.Text = "Delete row";
+            this.deleteRowButton.UseVisualStyleBackColor = true;
+            this.deleteRowButton.Click += new System.EventHandler(this.deleteRowButton_Click);
+            // 
             // ZooForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(998, 468);
+            this.ClientSize = new System.Drawing.Size(1028, 468);
+            this.Controls.Add(this.deleteRowButton);
             this.Controls.Add(this.searchButton);
             this.Controls.Add(this.spiecesLabel);
             this.Controls.Add(this.typeLabel);
@@ -147,6 +159,7 @@
         private System.Windows.Forms.Label typeLabel;
         private System.Windows.Forms.Label spiecesLabel;
         private System.Windows.Forms.Button searchButton;
+        private System.Windows.Forms.Button deleteRowButton;
     }
 }
 

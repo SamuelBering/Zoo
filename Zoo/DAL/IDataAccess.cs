@@ -17,5 +17,6 @@ namespace Zoo.DAL
 
         int AddOrUpdateAnimal(ViewModels.Animal animal);
 
+        void RemoveAnimal(ViewModels.Animal animal);
     }
 }
