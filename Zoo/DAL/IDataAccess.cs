@@ -15,7 +15,7 @@ namespace Zoo.DAL
 
         BindingList<ViewModels.Animal> GetAnimals(string enviroment, string type, string spieces);
 
-        int AddNewAnimal(ViewModels.Animal animal);
+        int AddOrUpdateAnimal(ViewModels.Animal animal);
 
     }
 }

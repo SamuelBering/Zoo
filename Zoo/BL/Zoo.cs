@@ -16,9 +16,9 @@ namespace Zoo.BL
             this.dataAccess = dataAccess;
         }
 
-        public int AddNewAnimal(ViewModels.Animal animal)
+        public int AddOrUpdateAnimal(ViewModels.Animal animal)
         {
-            return dataAccess.AddNewAnimal(animal);
+            return dataAccess.AddOrUpdateAnimal(animal);
         }
 
         public BindingList<ViewModels.Animal> GetAllAnimals()
@@ -32,6 +32,7 @@ namespace Zoo.BL
             environments.Insert(0, new ViewModels.Environment { Id = -1, Name = "" });
             return environments;
         }
+
 
         public BindingList<ViewModels.Animal> GetAnimals(string enviroment, string type, string spieces)
         {

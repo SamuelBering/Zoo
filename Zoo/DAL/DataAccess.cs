@@ -96,7 +96,7 @@ namespace Zoo.DAL
             return environments;
         }
 
-        public int AddNewAnimal(ViewModels.Animal animal)
+        public int AddOrUpdateAnimal(ViewModels.Animal animal)
         {
             using (var db = new ZooContext())
             {
@@ -132,18 +132,39 @@ namespace Zoo.DAL
                     return false;
                 }).ToList();
 
-                var newAnimal = new Animal
-                {
-                    Name = animal.Name,
-                    Type = animal.Type,
-                    Weight = animal.Weight,
-                    Spieces = spieces,
-                    CountryOfOrigin = countryOfOrigin,
-                    Environment = environment,
-                    Parents = parents.Count > 0 ? parents : null
-                };
+                Animal newAnimal = null;
 
-                db.Animals.Add(newAnimal);
+                if (animal.Id != 0)
+                {
+                    newAnimal = db.Animals.Where(a => a.AnimalId == animal.Id).Single();
+                    if (newAnimal.Parents != null && newAnimal.Parents.Count > 0)
+                    {
+                        newAnimal.Parents.Clear();
+                        db.SaveChanges();
+                    }
+
+                    newAnimal.Name = animal.Name;
+                    newAnimal.Type = animal.Type;
+                    newAnimal.Weight = animal.Weight;
+                    newAnimal.Spieces = spieces;
+                    newAnimal.CountryOfOrigin = countryOfOrigin;
+                    newAnimal.Environment = environment;
+
+                    newAnimal.Parents = parents.Count > 0 ? parents : null;
+                }
+                else
+                {
+                    newAnimal = new Animal();
+                    newAnimal.Name = animal.Name;
+                    newAnimal.Type = animal.Type;
+                    newAnimal.Weight = animal.Weight;
+                    newAnimal.Spieces = spieces;
+                    newAnimal.CountryOfOrigin = countryOfOrigin;
+                    newAnimal.Environment = environment;
+                    newAnimal.Parents = parents.Count > 0 ? parents : null;
+                    db.Animals.Add(newAnimal);
+                }
+
                 db.SaveChanges();
                 return newAnimal.AnimalId;
             }

@@ -47,6 +47,7 @@
             this.resultDataGridView.RowTemplate.Height = 24;
             this.resultDataGridView.Size = new System.Drawing.Size(804, 262);
             this.resultDataGridView.TabIndex = 0;
+            this.resultDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.resultDataGridView_CellClick);
             this.resultDataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.resultDataGridView_CellEndEdit);
             // 
             // environmentComboBox

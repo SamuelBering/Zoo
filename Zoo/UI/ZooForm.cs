@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Windows.Forms;
 using Zoo.BL;
-//using Zoo.DBContext;
 using System.Linq;
 using System.Collections.Generic;
 using Zoo.ViewModels;
-//using System.Data.Entity.Migrations;
-
+using Zoo.UI;
+using System.ComponentModel;
 
 namespace Zoo
 {
@@ -42,101 +41,126 @@ namespace Zoo
             resultDataGridView.DataSource = zoo.GetAnimals(environment, type, spieces);
         }
 
-        private void resultDataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        private void AddNewAnimalFromNameWeightSpiecesOrCountry(DataGridView dataGridView,
+                            DataGridViewCellEventArgs e,
+                            string columnName, object newValue)
         {
-            var newValue = resultDataGridView[e.ColumnIndex, e.RowIndex].Value;
-            var columnName = resultDataGridView.Columns[e.ColumnIndex].HeaderText.ToLower();
+            Animal animal = null;
 
-            if ((int)resultDataGridView[0, e.RowIndex].Value == 0)
+            switch (columnName)
             {
-                Animal animal = null;
+                case "name":
+                    animal = new Animal
+                    {
+                        Name = (string)newValue
+                    };
+                    dataGridView[0, e.RowIndex].Value = zoo.AddOrUpdateAnimal(animal);
+                    break;
 
-                switch (columnName)
-                {
-                    case "name":
-                        animal = new Animal
-                        {
-                            Name = (string)newValue
-                        };
-                        resultDataGridView[0, e.RowIndex].Value = zoo.AddNewAnimal(animal);
-                        break;
-
-                    case "weight":
-                        animal = new Animal
-                        {
-                            Name = "Ny",
-                            Weight = (int)newValue
-                        };
-                        zoo.AddNewAnimal(animal);
-                        break;
-                    case "spieces":
-                        animal = new Animal
-                        {
-                            Name = "Ny",
-                            Spieces = (string)newValue
-                        };
-                        zoo.AddNewAnimal(animal);
-                        break;
-                    case "countryoforigin":
-                        animal = new Animal
-                        {
-                            Name = "Ny",
-                            CountryOfOrigin = (string)newValue
-                        };
-                        zoo.AddNewAnimal(animal);
-                        break;
-                }
+                case "weight":
+                    animal = new Animal
+                    {
+                        Name = "Ny",
+                        Weight = (int)newValue
+                    };
+                    dataGridView[0, e.RowIndex].Value = zoo.AddOrUpdateAnimal(animal);
+                    dataGridView.Rows[e.RowIndex].Cells["Name"].Value = animal.Name;
+                    break;
+                case "spieces":
+                    animal = new Animal
+                    {
+                        Name = "Ny",
+                        Spieces = (string)newValue
+                    };
+                    dataGridView[0, e.RowIndex].Value = zoo.AddOrUpdateAnimal(animal);
+                    dataGridView.Rows[e.RowIndex].Cells["Name"].Value = animal.Name;
+                    break;
+                case "countryoforigin":
+                    animal = new Animal
+                    {
+                        Name = "Ny",
+                        CountryOfOrigin = (string)newValue
+                    };
+                    dataGridView[0, e.RowIndex].Value = zoo.AddOrUpdateAnimal(animal);
+                    dataGridView.Rows[e.RowIndex].Cells["Name"].Value = animal.Name;
+                    break;
             }
         }
 
-        //private void resulutDataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        //{
-        //    /*  OM current row är större än rowcount
-        //     *     skapa en viewmodel.animal av aktuell row
-        //     *     call AddNewAnimal(viewAnimal)
-        //     *     
-        //     *  
-        //    */
+        private void resultDataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridView dataGridView = (DataGridView)sender;
 
-        //   
-        //}
+            var newValue = dataGridView[e.ColumnIndex, e.RowIndex].Value;
+            var columnName = dataGridView.Columns[e.ColumnIndex].HeaderText.ToLower();
 
-        //private void TestAddAnimalsToDB()
-        //{
-        //    using (var context = new ZooContext())
-        //    {
-        //        //var benny = (from e in context.Animals
-        //        //             where e.Name == "Benny"
-        //        //             select e).SingleOrDefault();
+            if ((int)dataGridView[0, e.RowIndex].Value == 0)
+            {
+                if (columnName == "name" || columnName == "weight" || columnName == "spieces" ||
+                    columnName == "countryoforigin")
+                    AddNewAnimalFromNameWeightSpiecesOrCountry(dataGridView, e, columnName, newValue);
+            }
+            else
+            {
+                if (columnName == "name" || columnName == "weight" || columnName == "spieces" ||
+                    columnName == "countryoforigin")
+                    UpdateAnimalFromNameWeightSpiecesOrCountry(dataGridView, e, columnName, newValue);
+            }
 
-        //        var benjamin = (from e in context.Animals
-        //                        where e.Name == "Benjamin"
-        //                        select e).SingleOrDefault();
-        //        var kickan = (from e in context.Animals
-        //                        where e.Name == "Kickan"
-        //                        select e).SingleOrDefault();
+        }
 
-        //        kickan.Parents.Add(benjamin);
+        private void UpdateAnimalFromNameWeightSpiecesOrCountry(DataGridView dataGridView, DataGridViewCellEventArgs e, string columnName, object newValue)
+        {
+            zoo.AddOrUpdateAnimal((Animal)dataGridView.Rows[e.RowIndex].DataBoundItem);
+        }
 
-        //        //Animal elephant2 = new Animal
-        //        //{
-        //        //    Name = "Kickan",
-        //        //    Type = "växtätare",
-        //        //    Weight = 1888,
-        //        //    CountryOfOrigin = benny.CountryOfOrigin,
-        //        //    Environment = benny.Environment,
-        //        //    Spieces = benny.Spieces,
-        //        //    Parents = benny.Parents
-        //        //};
+        private void GetTypeAndUpdateAnimal(DataGridView dataGridView, DataGridViewCellEventArgs e,
+                                            Animal animal)
+        {
+            DropDownListForm dropDownListForm = new DropDownListForm();
 
+            foreach (var item in this.typeComboBox.Items)
+                dropDownListForm.DropDownComboBox.Items.Add(item);
 
+            if (dropDownListForm.ShowDialog(this) == DialogResult.OK)
+            {
+                var selectedItem = dropDownListForm.DropDownComboBox.SelectedItem;
+                animal.Type = (string)selectedItem;
+            }
+            else
+            {
+            }
 
-        //        //context.Animals.AddOrUpdate(a => a.Name, elephant2);
+            dropDownListForm.Dispose();
+        }
 
-        //        context.SaveChanges();
+        private void resultDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridView dataGridView = (DataGridView)sender;
 
-        //    }
-        //}
+            var columnName = dataGridView.Columns[e.ColumnIndex].HeaderText.ToLower();
 
+            if (columnName == "type" || columnName == "environment" ||
+                columnName == "parent1" || columnName == "parent2")
+            {
+                if (e.RowIndex == dataGridView.Rows.Count - 1)
+                {
+
+                    BindingList<Animal> animals = (BindingList<Animal>)dataGridView.DataSource;
+                    dataGridView.DataSource = null;
+                    animals.Add(new Animal { Name = "Ny" });
+                    dataGridView.DataSource = animals;
+                    dataGridView.ClearSelection();
+                    dataGridView[e.ColumnIndex, e.RowIndex].Selected = true;
+                }
+
+                Animal animal = (Animal)dataGridView.Rows[e.RowIndex].DataBoundItem;
+
+                if (columnName == "type")                
+                    GetTypeAndUpdateAnimal(dataGridView, e, animal);
+                
+            }
+
+        }
     }
 }
