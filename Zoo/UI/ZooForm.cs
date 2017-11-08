@@ -181,6 +181,8 @@ namespace Zoo
 
             animals = new BindingList<Animal>(animals.Where(a => a.Id != animal.Id).ToList());
 
+            animals.Insert(0, new ViewModels.Animal { Id = -1, Name = "" });
+
             dropDownListForm.DropDownComboBox.DataSource = animals;
             dropDownListForm.DropDownComboBox.DisplayMember = "Name";
             dropDownListForm.DropDownComboBox.ValueMember = "Id";
@@ -195,8 +197,16 @@ namespace Zoo
                     (ViewModels.Animal)dropDownListForm.DropDownComboBox.SelectedItem;
                 if (selectedAnimal != null)
                 {
-                    animal.Parent1 = selectedAnimal.Name;
-                    animal.Parent1Id = selectedAnimal.Id;
+                    if (selectedAnimal.Id == -1)
+                    {
+                        animal.Parent1 = null;
+                        animal.Parent1Id = null;
+                    }
+                    else
+                    {
+                        animal.Parent1 = selectedAnimal.Name;
+                        animal.Parent1Id = selectedAnimal.Id;
+                    }
                 }
             }
 
@@ -211,6 +221,7 @@ namespace Zoo
             BindingList<Animal> animals = zoo.GetAllAnimals();
 
             animals = new BindingList<Animal>(animals.Where(a => a.Id != animal.Id).ToList());
+            animals.Insert(0, new ViewModels.Animal { Id = -1, Name = "" });
 
             dropDownListForm.DropDownComboBox.DataSource = animals;
             dropDownListForm.DropDownComboBox.DisplayMember = "Name";
@@ -227,8 +238,16 @@ namespace Zoo
 
                 if (selectedAnimal != null)
                 {
-                    animal.Parent2 = selectedAnimal.Name;
-                    animal.Parent2Id = selectedAnimal.Id;
+                    if (selectedAnimal.Id == -1)
+                    {
+                        animal.Parent2 = null;
+                        animal.Parent2Id = null;
+                    }
+                    else
+                    {
+                        animal.Parent2 = selectedAnimal.Name;
+                        animal.Parent2Id = selectedAnimal.Id;
+                    }
                 }
             }
 
@@ -283,12 +302,16 @@ namespace Zoo
                 {
                     if (resultDataGridView.Rows[i].Selected)
                     {
-                        Animal animal = (Animal)resultDataGridView.Rows[i].DataBoundItem;
-                        zoo.RemoveAnimal(animal);
 
-                        UpdateDataGridViewWithFilterResults();
+                        Animal animal = (Animal)resultDataGridView.Rows[i].DataBoundItem;
+                        if (animal.Parent1Id != null || animal.Parent2Id != null)
+                            MessageBox.Show($"Unable to remove animal: \"{animal.Name}\" on row: {i+1}. You must remove all parent connections for this animal before removal.", "Animal has parent connections!");
+                        else
+                            zoo.RemoveAnimal(animal);
+
                     }
                 }
+                UpdateDataGridViewWithFilterResults();
             }
         }
     }
