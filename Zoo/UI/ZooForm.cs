@@ -21,9 +21,21 @@ namespace Zoo
             LoadAllAnimals();
         }
 
+        private void InitializeResultDataGridColumns()
+        {
+            resultDataGridView.Columns["Type"].ReadOnly = true;
+            resultDataGridView.Columns["Environment"].ReadOnly = true;
+            resultDataGridView.Columns["Parent1"].ReadOnly = true;
+            resultDataGridView.Columns["Parent2"].ReadOnly = true;
+            //resultDataGridView.Columns["Id"].Visible = false;
+            resultDataGridView.Columns["Parent1Id"].Visible = false;
+            resultDataGridView.Columns["Parent2Id"].Visible = false;
+        }
+
         private void LoadAllAnimals()
         {
             resultDataGridView.DataSource = zoo.GetAllAnimals();
+            InitializeResultDataGridColumns();
         }
 
         private void LoadAllEnvironments()
@@ -39,6 +51,7 @@ namespace Zoo
             string type = typeComboBox.Text;
             string spieces = spiecesTextBox.Text;
             resultDataGridView.DataSource = zoo.GetAnimals(environment, type, spieces);
+            InitializeResultDataGridColumns();
         }
 
         private void AddNewAnimalFromNameWeightSpiecesOrCountry(DataGridView dataGridView,
@@ -127,7 +140,7 @@ namespace Zoo
             if (dropDownListForm.ShowDialog(this) == DialogResult.OK)
             {
                 var selectedItem = dropDownListForm.DropDownComboBox.SelectedItem;
-                animal.Type = (string)selectedItem;
+                animal.Type = selectedItem != null ? (string)selectedItem : null;
             }
 
             dropDownListForm.Dispose();
@@ -149,7 +162,70 @@ namespace Zoo
                 ViewModels.Environment selectedEnvironment =
                     (ViewModels.Environment)dropDownListForm.DropDownComboBox.SelectedItem;
 
-                animal.Environment = selectedEnvironment.Name;
+                animal.Environment = (selectedEnvironment != null && selectedEnvironment.Name != "") ? selectedEnvironment.Name : null;
+            }
+
+            dropDownListForm.Dispose();
+        }
+
+        private void GetParent1AndUpdateAnimal(DataGridView dataGridView, DataGridViewCellEventArgs e,
+                                         Animal animal)
+        {
+            DropDownListForm dropDownListForm = new DropDownListForm();
+
+            BindingList<Animal> animals = zoo.GetAllAnimals();
+
+            animals = new BindingList<Animal>(animals.Where(a => a.Id != animal.Id).ToList());
+
+            dropDownListForm.DropDownComboBox.DataSource = animals;
+            dropDownListForm.DropDownComboBox.DisplayMember = "Name";
+            dropDownListForm.DropDownComboBox.ValueMember = "Id";
+
+            for (int i = 0; i < dropDownListForm.DropDownComboBox.Items.Count; i++)
+                if (((ViewModels.Animal)dropDownListForm.DropDownComboBox.Items[i]).Id == animal.Parent1Id)
+                    dropDownListForm.DropDownComboBox.SelectedIndex = i;
+
+            if (dropDownListForm.ShowDialog(this) == DialogResult.OK)
+            {
+                ViewModels.Animal selectedAnimal =
+                    (ViewModels.Animal)dropDownListForm.DropDownComboBox.SelectedItem;
+                if (selectedAnimal != null)
+                {
+                    animal.Parent1 = selectedAnimal.Name;
+                    animal.Parent1Id = selectedAnimal.Id;
+                }
+            }
+
+            dropDownListForm.Dispose();
+        }
+
+        private void GetParent2AndUpdateAnimal(DataGridView dataGridView, DataGridViewCellEventArgs e,
+                                        Animal animal)
+        {
+            DropDownListForm dropDownListForm = new DropDownListForm();
+
+            BindingList<Animal> animals = zoo.GetAllAnimals();
+
+            animals = new BindingList<Animal>(animals.Where(a => a.Id != animal.Id).ToList());
+
+            dropDownListForm.DropDownComboBox.DataSource = animals;
+            dropDownListForm.DropDownComboBox.DisplayMember = "Name";
+            dropDownListForm.DropDownComboBox.ValueMember = "Id";
+
+            for (int i = 0; i < dropDownListForm.DropDownComboBox.Items.Count; i++)
+                if (((ViewModels.Animal)dropDownListForm.DropDownComboBox.Items[i]).Id == animal.Parent2Id)
+                    dropDownListForm.DropDownComboBox.SelectedIndex = i;
+
+            if (dropDownListForm.ShowDialog(this) == DialogResult.OK)
+            {
+                ViewModels.Animal selectedAnimal =
+                    (ViewModels.Animal)dropDownListForm.DropDownComboBox.SelectedItem;
+
+                if (selectedAnimal != null)
+                {
+                    animal.Parent2 = selectedAnimal.Name;
+                    animal.Parent2Id = selectedAnimal.Id;
+                }
             }
 
             dropDownListForm.Dispose();
@@ -171,6 +247,7 @@ namespace Zoo
                     dataGridView.DataSource = null;
                     animals.Add(new Animal { Name = "Ny" });
                     dataGridView.DataSource = animals;
+                    InitializeResultDataGridColumns();
                     dataGridView.ClearSelection();
                     dataGridView[e.ColumnIndex, e.RowIndex].Selected = true;
                 }
@@ -181,9 +258,12 @@ namespace Zoo
                     GetTypeAndUpdateAnimal(dataGridView, e, animal);
                 else if (columnName == "environment")
                     GetEnvironmentAndUpdateAnimal(dataGridView, e, animal);
+                else if (columnName == "parent1")
+                    GetParent1AndUpdateAnimal(dataGridView, e, animal);
+                else if (columnName == "parent2")
+                    GetParent2AndUpdateAnimal(dataGridView, e, animal);
 
-
-
+                dataGridView[0, e.RowIndex].Value = zoo.AddOrUpdateAnimal(animal);
             }
 
         }
