@@ -307,7 +307,7 @@ namespace Zoo
 
                         Animal animal = (Animal)resultDataGridView.Rows[i].DataBoundItem;
                         if (animal.Parent1Id != null || animal.Parent2Id != null)
-                            MessageBox.Show($"Unable to remove animal: \"{animal.Name}\" on row: {i+1}. You must remove all parent connections for this animal before removal.", "Animal has parent connections!");
+                            MessageBox.Show($"Unable to remove animal: \"{animal.Name}\" on row: {i + 1}. You must remove all parent connections for this animal before removal.", "Animal has parent connections!");
                         else
                             zoo.RemoveAnimal(animal);
 
@@ -315,6 +315,17 @@ namespace Zoo
                 }
                 UpdateDataGridViewWithFilterResults();
             }
+        }
+
+        private void veterinaryReservationsButton_Click(object sender, EventArgs e)
+        {
+            if (resultDataGridView.SelectedRows.Count == 1)
+            {
+                int animalId = ((Animal)resultDataGridView.SelectedRows[0].DataBoundItem).Id;
+                VeterinaryReservationsForm veterinaryReservationsForm = new VeterinaryReservationsForm(animalId, zoo);
+                veterinaryReservationsForm.Show();
+            }
+
         }
     }
 }

@@ -37,6 +37,7 @@
             this.spiecesLabel = new System.Windows.Forms.Label();
             this.searchButton = new System.Windows.Forms.Button();
             this.deleteRowButton = new System.Windows.Forms.Button();
+            this.veterinaryReservationsButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.resultDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -127,11 +128,22 @@
             this.deleteRowButton.UseVisualStyleBackColor = true;
             this.deleteRowButton.Click += new System.EventHandler(this.deleteRowButton_Click);
             // 
+            // veterinaryReservationsButton
+            // 
+            this.veterinaryReservationsButton.Location = new System.Drawing.Point(915, 189);
+            this.veterinaryReservationsButton.Name = "veterinaryReservationsButton";
+            this.veterinaryReservationsButton.Size = new System.Drawing.Size(101, 77);
+            this.veterinaryReservationsButton.TabIndex = 9;
+            this.veterinaryReservationsButton.Text = "Veterinary Reservations";
+            this.veterinaryReservationsButton.UseVisualStyleBackColor = true;
+            this.veterinaryReservationsButton.Click += new System.EventHandler(this.veterinaryReservationsButton_Click);
+            // 
             // ZooForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1028, 468);
+            this.Controls.Add(this.veterinaryReservationsButton);
             this.Controls.Add(this.deleteRowButton);
             this.Controls.Add(this.searchButton);
             this.Controls.Add(this.spiecesLabel);
@@ -160,6 +172,7 @@
         private System.Windows.Forms.Label spiecesLabel;
         private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.Button deleteRowButton;
+        private System.Windows.Forms.Button veterinaryReservationsButton;
     }
 }
 

@@ -142,11 +142,11 @@
     <Compile Include="UI\DropDownListForm.Designer.cs">
       <DependentUpon>DropDownListForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\VeterinaryReservations.cs">
+    <Compile Include="UI\VeterinaryReservationsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\VeterinaryReservations.Designer.cs">
-      <DependentUpon>VeterinaryReservations.cs</DependentUpon>
+    <Compile Include="UI\VeterinaryReservationsForm.Designer.cs">
+      <DependentUpon>VeterinaryReservationsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Animal.cs" />
     <Compile Include="UI\ZooForm.cs">
@@ -224,8 +224,8 @@
     <EmbeddedResource Include="UI\DropDownListForm.resx">
       <DependentUpon>DropDownListForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\VeterinaryReservations.resx">
-      <DependentUpon>VeterinaryReservations.cs</DependentUpon>
+    <EmbeddedResource Include="UI\VeterinaryReservationsForm.resx">
+      <DependentUpon>VeterinaryReservationsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ZooForm.resx">
       <DependentUpon>ZooForm.cs</DependentUpon>

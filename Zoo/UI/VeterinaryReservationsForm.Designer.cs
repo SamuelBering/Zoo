@@ -1,6 +1,6 @@
 ﻿namespace Zoo.UI
 {
-    partial class VeterinaryReservations
+    partial class VeterinaryReservationsForm
     {
         /// <summary>
         /// Required designer variable.
@@ -41,13 +41,13 @@
             this.reservationsDataGridView.Size = new System.Drawing.Size(870, 297);
             this.reservationsDataGridView.TabIndex = 0;
             // 
-            // VeterinaryReservations
+            // VeterinaryReservationsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1037, 488);
             this.Controls.Add(this.reservationsDataGridView);
-            this.Name = "VeterinaryReservations";
+            this.Name = "VeterinaryReservationsForm";
             this.Text = "Veterinary Reservations";
             ((System.ComponentModel.ISupportInitialize)(this.reservationsDataGridView)).EndInit();
             this.ResumeLayout(false);
