@@ -21,6 +21,9 @@ namespace Zoo.DBContext
         public virtual DbSet<CountryOfOrigin> CountriesOfOrigin { get; set; }
         public virtual DbSet<Environment> Environments { get; set; }
         public virtual DbSet<Spieces> Spieces { get; set; }
+        public virtual DbSet<Veterinary> Veterinaries { get; set; }
+        public virtual DbSet<VeterinaryReservation> VeterinaryReservations { get; set; }
+        public virtual DbSet<Diagnosis> Diagnoses { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -59,8 +59,11 @@
     <Compile Include="DAL\IDataAccess.cs" />
     <Compile Include="DBContext\Animal.cs" />
     <Compile Include="DBContext\CountryOfOrigin.cs" />
+    <Compile Include="DBContext\Diagnosis.cs" />
     <Compile Include="DBContext\Environment.cs" />
     <Compile Include="DBContext\Spieces.cs" />
+    <Compile Include="DBContext\Veterinary.cs" />
+    <Compile Include="DBContext\VeterinaryReservation.cs" />
     <Compile Include="DBContext\ZooContext.cs" />
     <Compile Include="Migrations\201711031224428_initial.cs" />
     <Compile Include="Migrations\201711031224428_initial.Designer.cs">
@@ -101,6 +104,30 @@
     <Compile Include="Migrations\201711040629544_AddWeightPropToAnimal.cs" />
     <Compile Include="Migrations\201711040629544_AddWeightPropToAnimal.Designer.cs">
       <DependentUpon>201711040629544_AddWeightPropToAnimal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711090915385_AddVeterinaryClass.cs" />
+    <Compile Include="Migrations\201711090915385_AddVeterinaryClass.Designer.cs">
+      <DependentUpon>201711090915385_AddVeterinaryClass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711090921309_AddVeterinaryClassToDbContext.cs" />
+    <Compile Include="Migrations\201711090921309_AddVeterinaryClassToDbContext.Designer.cs">
+      <DependentUpon>201711090921309_AddVeterinaryClassToDbContext.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711090934247_RemoveManyToManyRelBetweenVeterinaryAndAnimal.cs" />
+    <Compile Include="Migrations\201711090934247_RemoveManyToManyRelBetweenVeterinaryAndAnimal.Designer.cs">
+      <DependentUpon>201711090934247_RemoveManyToManyRelBetweenVeterinaryAndAnimal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711090948182_AddVeterinaryReservationExciplitJoinTable.cs" />
+    <Compile Include="Migrations\201711090948182_AddVeterinaryReservationExciplitJoinTable.Designer.cs">
+      <DependentUpon>201711090948182_AddVeterinaryReservationExciplitJoinTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711090956175_AddDateTimePropToVeterinaryReservationsClass.cs" />
+    <Compile Include="Migrations\201711090956175_AddDateTimePropToVeterinaryReservationsClass.Designer.cs">
+      <DependentUpon>201711090956175_AddDateTimePropToVeterinaryReservationsClass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711091005538_IncludeDateTimePropInPrimaryKeyForVeterinaryReservationsAndAddDiagnosis.cs" />
+    <Compile Include="Migrations\201711091005538_IncludeDateTimePropInPrimaryKeyForVeterinaryReservationsAndAddDiagnosis.Designer.cs">
+      <DependentUpon>201711091005538_IncludeDateTimePropInPrimaryKeyForVeterinaryReservationsAndAddDiagnosis.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="BL\Zoo.cs" />
@@ -150,6 +177,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711040629544_AddWeightPropToAnimal.resx">
       <DependentUpon>201711040629544_AddWeightPropToAnimal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711090915385_AddVeterinaryClass.resx">
+      <DependentUpon>201711090915385_AddVeterinaryClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711090921309_AddVeterinaryClassToDbContext.resx">
+      <DependentUpon>201711090921309_AddVeterinaryClassToDbContext.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711090934247_RemoveManyToManyRelBetweenVeterinaryAndAnimal.resx">
+      <DependentUpon>201711090934247_RemoveManyToManyRelBetweenVeterinaryAndAnimal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711090948182_AddVeterinaryReservationExciplitJoinTable.resx">
+      <DependentUpon>201711090948182_AddVeterinaryReservationExciplitJoinTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711090956175_AddDateTimePropToVeterinaryReservationsClass.resx">
+      <DependentUpon>201711090956175_AddDateTimePropToVeterinaryReservationsClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711091005538_IncludeDateTimePropInPrimaryKeyForVeterinaryReservationsAndAddDiagnosis.resx">
+      <DependentUpon>201711091005538_IncludeDateTimePropInPrimaryKeyForVeterinaryReservationsAndAddDiagnosis.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

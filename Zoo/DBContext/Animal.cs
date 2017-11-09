@@ -13,6 +13,7 @@ namespace Zoo.DBContext
         public Animal()
         {
             this.Parents = new HashSet<Animal>();
+            this.VeterinaryReservations = new HashSet<VeterinaryReservation>();
         }
 
         public int AnimalId { get; set; }
@@ -24,6 +25,6 @@ namespace Zoo.DBContext
         public virtual Environment Environment { get; set; }
 
         public virtual ICollection<Animal> Parents { get; set; }
-
+        public virtual ICollection<VeterinaryReservation> VeterinaryReservations { get; set; }
     }
 }
