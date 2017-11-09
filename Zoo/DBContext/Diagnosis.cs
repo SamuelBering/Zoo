@@ -13,11 +13,14 @@ namespace Zoo.DBContext
         public Diagnosis()
         {
             this.VeterinaryReservations = new HashSet<VeterinaryReservation>();
+            this.Medicines = new HashSet<Medicine>();
         }
 
         public int DiagnosisId { get; set; }
         public string Description { get; set; }
 
         public virtual ICollection<VeterinaryReservation> VeterinaryReservations { get; set; }
+
+        public virtual ICollection<Medicine> Medicines { get; set; }
     }
 }

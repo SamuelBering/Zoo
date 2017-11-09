@@ -5,6 +5,8 @@ namespace Zoo.BL
 {
     public interface IZoo
     {
+        void SeedDataBase();
+
         BindingList<ViewModels.Animal> GetAllAnimals();
 
         BindingList<ViewModels.Environment> GetAllEnvironments();
@@ -14,6 +16,8 @@ namespace Zoo.BL
         int AddOrUpdateAnimal(ViewModels.Animal animal);
 
         void RemoveAnimal(ViewModels.Animal animal);
+
+        BindingList<ViewModels.VeterinaryReservation> GetVeterinaryReservations(int animalId);
 
     }
 }

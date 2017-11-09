@@ -19,6 +19,8 @@ namespace Zoo
             InitializeComponent();
             LoadAllEnvironments();
             LoadAllAnimals();
+            zoo.GetVeterinaryReservations(28);
+            //zoo.SeedDataBase();
         }
 
         private void InitializeResultDataGridColumns()

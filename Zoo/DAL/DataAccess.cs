@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using Zoo.DBContext;
 
@@ -6,6 +8,74 @@ namespace Zoo.DAL
 {
     public class DataAccess : IDataAccess
     {
+        //Just for testing purposes
+        public void SeedDataBase()
+        {
+            using (var db = new ZooContext())
+            {
+                var animal = db.Animals.Where(a => a.Name.Contains("Samuel")).Single();
+
+
+                animal.VeterinaryReservations = new List<VeterinaryReservation>
+                {
+
+                    new VeterinaryReservation
+                    {
+                        Animal=animal,
+
+                        Veterinary=new Veterinary
+                        {
+                            Name="Rochi Ardulla"
+                        },
+
+                        DateTime=DateTime.Now
+                    }
+                };
+
+                db.SaveChanges();
+            }
+        }
+
+        public BindingList<ViewModels.VeterinaryReservation> GetVeterinaryReservations(int animalId)
+        {
+            BindingList<ViewModels.VeterinaryReservation> reservations;
+
+            using (var db = new ZooContext())
+            {
+                var reservationsTemp = (from r in db.VeterinaryReservations
+                             where r.AnimalId == animalId                             
+                             select new
+                             {
+                                 VeterinaryReservation = new ViewModels.VeterinaryReservation
+                                 {
+                                     AnimalId = r.AnimalId,
+                                     VeterinaryId = r.VeterinaryId,
+                                     Time = r.DateTime,
+                                     Veterinary = r.Veterinary.Name,
+                                     Diagnosis = r.Diagnosis.Description
+                                 },
+
+                                 Medicines = r.Diagnosis.Medicines
+                             }).ToList();
+
+                var query = reservationsTemp.Select(r =>
+                {
+                    List<ViewModels.Medicine> medicines =  r.Medicines.
+                        Select(m => new ViewModels.Medicine { Id = m.MedicineId, Name = m.Name, }).ToList();
+                    ViewModels.VeterinaryReservation veterinaryReservation = r.VeterinaryReservation;
+                    veterinaryReservation.Medicines = medicines;
+                    veterinaryReservation.MedicineNames = 
+                        string.Join(", ", medicines.Select(m => m.Name).ToList());
+                    return veterinaryReservation;
+                });
+
+                reservations = new BindingList<ViewModels.VeterinaryReservation>(query.ToList());
+
+            }
+
+            return reservations;
+        }
+
         public BindingList<ViewModels.Animal> GetAnimals(string enviroment, string type, string spieces)
         {
             BindingList<ViewModels.Animal> animals;
@@ -127,7 +197,7 @@ namespace Zoo.DAL
 
                 var environment = db.Environments.Where(e => e.Name.ToLower() == animal.Environment).SingleOrDefault();
                 if (environment == null && animal.Environment != null)
-                    environment = new Environment
+                    environment = new DBContext.Environment
                     {
                         Name = animal.Environment
                     };

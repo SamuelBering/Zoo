@@ -61,6 +61,7 @@
     <Compile Include="DBContext\CountryOfOrigin.cs" />
     <Compile Include="DBContext\Diagnosis.cs" />
     <Compile Include="DBContext\Environment.cs" />
+    <Compile Include="DBContext\Medicine.cs" />
     <Compile Include="DBContext\Spieces.cs" />
     <Compile Include="DBContext\Veterinary.cs" />
     <Compile Include="DBContext\VeterinaryReservation.cs" />
@@ -129,6 +130,10 @@
     <Compile Include="Migrations\201711091005538_IncludeDateTimePropInPrimaryKeyForVeterinaryReservationsAndAddDiagnosis.Designer.cs">
       <DependentUpon>201711091005538_IncludeDateTimePropInPrimaryKeyForVeterinaryReservationsAndAddDiagnosis.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711091022267_AddMedicineClass.cs" />
+    <Compile Include="Migrations\201711091022267_AddMedicineClass.Designer.cs">
+      <DependentUpon>201711091022267_AddMedicineClass.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="BL\Zoo.cs" />
     <Compile Include="UI\DropDownListForm.cs">
@@ -136,6 +141,12 @@
     </Compile>
     <Compile Include="UI\DropDownListForm.Designer.cs">
       <DependentUpon>DropDownListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\VeterinaryReservations.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\VeterinaryReservations.Designer.cs">
+      <DependentUpon>VeterinaryReservations.cs</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Animal.cs" />
     <Compile Include="UI\ZooForm.cs">
@@ -147,7 +158,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Environment.cs" />
+    <Compile Include="ViewModels\Medicine.cs" />
     <Compile Include="ViewModels\Spieces.cs" />
+    <Compile Include="ViewModels\VeterinaryReservation.cs" />
     <EmbeddedResource Include="Migrations\201711031224428_initial.resx">
       <DependentUpon>201711031224428_initial.cs</DependentUpon>
     </EmbeddedResource>
@@ -196,6 +209,9 @@
     <EmbeddedResource Include="Migrations\201711091005538_IncludeDateTimePropInPrimaryKeyForVeterinaryReservationsAndAddDiagnosis.resx">
       <DependentUpon>201711091005538_IncludeDateTimePropInPrimaryKeyForVeterinaryReservationsAndAddDiagnosis.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711091022267_AddMedicineClass.resx">
+      <DependentUpon>201711091022267_AddMedicineClass.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -207,6 +223,9 @@
     </Compile>
     <EmbeddedResource Include="UI\DropDownListForm.resx">
       <DependentUpon>DropDownListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\VeterinaryReservations.resx">
+      <DependentUpon>VeterinaryReservations.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ZooForm.resx">
       <DependentUpon>ZooForm.cs</DependentUpon>

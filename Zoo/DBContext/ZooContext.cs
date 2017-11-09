@@ -24,6 +24,7 @@ namespace Zoo.DBContext
         public virtual DbSet<Veterinary> Veterinaries { get; set; }
         public virtual DbSet<VeterinaryReservation> VeterinaryReservations { get; set; }
         public virtual DbSet<Diagnosis> Diagnoses { get; set; }
+        public virtual DbSet<Medicine> Medicines { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

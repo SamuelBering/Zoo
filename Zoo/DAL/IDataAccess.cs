@@ -9,6 +9,8 @@ namespace Zoo.DAL
 {
     public interface IDataAccess
     {
+        void SeedDataBase();
+
         BindingList<ViewModels.Animal> GetAllAnimals();
 
         BindingList<ViewModels.Environment> GetAllEnvironments();
@@ -18,5 +20,7 @@ namespace Zoo.DAL
         int AddOrUpdateAnimal(ViewModels.Animal animal);
 
         void RemoveAnimal(ViewModels.Animal animal);
+
+        BindingList<ViewModels.VeterinaryReservation> GetVeterinaryReservations(int animalId);
     }
 }

@@ -16,6 +16,11 @@ namespace Zoo.BL
             this.dataAccess = dataAccess;
         }
 
+        public void SeedDataBase()
+        {
+            this.dataAccess.SeedDataBase();
+        }
+
         public int AddOrUpdateAnimal(ViewModels.Animal animal)
         {
             return dataAccess.AddOrUpdateAnimal(animal);
@@ -44,6 +49,9 @@ namespace Zoo.BL
             dataAccess.RemoveAnimal(animal);
         }
 
-
+        public BindingList<ViewModels.VeterinaryReservation> GetVeterinaryReservations(int animalId)
+        {
+            return dataAccess.GetVeterinaryReservations(animalId);
+        }
     }
 }

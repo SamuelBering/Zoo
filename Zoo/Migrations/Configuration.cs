@@ -16,6 +16,7 @@ namespace Zoo.Migrations
 
         protected override void Seed(Zoo.DBContext.ZooContext context)
         {
+
             //Animal elephant1 = new Animal
             //{
             //    Name = "Benny",
