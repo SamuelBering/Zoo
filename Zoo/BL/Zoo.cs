@@ -54,9 +54,19 @@ namespace Zoo.BL
             dataAccess.RemoveAnimal(animal);
         }
 
+        public void RemoveVeterinaryReservation(ViewModels.VeterinaryReservation veterinaryReservation)
+        {
+            dataAccess.RemoveVeterinaryReservation(veterinaryReservation);
+        }
+
         public BindingList<ViewModels.VeterinaryReservation> GetVeterinaryReservations(int animalId)
         {
             return dataAccess.GetVeterinaryReservations(animalId);
+        }
+
+        public BindingList<ViewModels.Medicine> GetAllMedicines()
+        {
+            return dataAccess.GetAllMedicines();
         }
     }
 }

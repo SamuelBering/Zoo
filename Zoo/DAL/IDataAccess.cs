@@ -23,6 +23,11 @@ namespace Zoo.DAL
 
         void RemoveAnimal(ViewModels.Animal animal);
 
+        void RemoveVeterinaryReservation(ViewModels.VeterinaryReservation veterinaryReservation);
+
         BindingList<ViewModels.VeterinaryReservation> GetVeterinaryReservations(int animalId);
+
+        BindingList<ViewModels.Medicine> GetAllMedicines();
+
     }
 }

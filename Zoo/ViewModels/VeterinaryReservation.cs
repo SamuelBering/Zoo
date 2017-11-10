@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,11 +11,22 @@ namespace Zoo.ViewModels
     {
         public int AnimalId { get; set; }
         public int VeterinaryId { get; set; }
+
+        [ReadOnly(true)]
         public DateTime Time { get; set; }
+
         public int? DiagnosisId { get; set; }
+
+        [ReadOnly(true)]
         public string Veterinary { get; set; }
+
         public string Diagnosis { get; set; }
+
+        [DisplayName("Medicines")]
+        [ReadOnly(true)]
         public string MedicineNames { get; set; }
+
+        [Browsable(false)]
         public List<Medicine> Medicines { get; set; }
 
         public void Update(VeterinaryReservation r)

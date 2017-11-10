@@ -1,6 +1,6 @@
 ﻿namespace Zoo.UI
 {
-    partial class DropDownListForm
+    partial class ListBoxForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,57 +28,58 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dropDownComboBox = new System.Windows.Forms.ComboBox();
-            this.okButton = new System.Windows.Forms.Button();
+            this.multipleListBox = new System.Windows.Forms.ListBox();
             this.cancelButton = new System.Windows.Forms.Button();
+            this.okButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // dropDownComboBox
+            // multipleListBox
             // 
-            this.dropDownComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.dropDownComboBox.FormattingEnabled = true;
-            this.dropDownComboBox.Location = new System.Drawing.Point(32, 42);
-            this.dropDownComboBox.Name = "dropDownComboBox";
-            this.dropDownComboBox.Size = new System.Drawing.Size(210, 24);
-            this.dropDownComboBox.TabIndex = 0;
-            // 
-            // okButton
-            // 
-            this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.okButton.Location = new System.Drawing.Point(32, 103);
-            this.okButton.Name = "okButton";
-            this.okButton.Size = new System.Drawing.Size(75, 31);
-            this.okButton.TabIndex = 1;
-            this.okButton.Text = "OK";
-            this.okButton.UseVisualStyleBackColor = true;
+            this.multipleListBox.FormattingEnabled = true;
+            this.multipleListBox.ItemHeight = 16;
+            this.multipleListBox.Location = new System.Drawing.Point(12, 12);
+            this.multipleListBox.Name = "multipleListBox";
+            this.multipleListBox.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.multipleListBox.Size = new System.Drawing.Size(210, 228);
+            this.multipleListBox.TabIndex = 0;
             // 
             // cancelButton
             // 
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Location = new System.Drawing.Point(129, 103);
+            this.cancelButton.Location = new System.Drawing.Point(132, 258);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(75, 31);
-            this.cancelButton.TabIndex = 2;
+            this.cancelButton.Size = new System.Drawing.Size(90, 31);
+            this.cancelButton.TabIndex = 4;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
             // 
-            // DropDownListForm
+            // okButton
+            // 
+            this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.okButton.Location = new System.Drawing.Point(12, 258);
+            this.okButton.Name = "okButton";
+            this.okButton.Size = new System.Drawing.Size(87, 31);
+            this.okButton.TabIndex = 3;
+            this.okButton.Text = "OK";
+            this.okButton.UseVisualStyleBackColor = true;
+            // 
+            // ListBoxForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(283, 171);
+            this.ClientSize = new System.Drawing.Size(236, 301);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.okButton);
-            this.Controls.Add(this.dropDownComboBox);
-            this.Name = "DropDownListForm";
+            this.Controls.Add(this.multipleListBox);
+            this.Name = "ListBoxForm";
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.ComboBox dropDownComboBox;
-        private System.Windows.Forms.Button okButton;
+        private System.Windows.Forms.ListBox multipleListBox;
         private System.Windows.Forms.Button cancelButton;
+        private System.Windows.Forms.Button okButton;
     }
 }

@@ -169,6 +169,32 @@ namespace Zoo.DAL
             }
         }
 
+        public void RemoveVeterinaryReservation(ViewModels.VeterinaryReservation veterinaryReservation)
+        {
+            using (var db = new ZooContext())
+            {
+                var reservationToRemove =
+                    new VeterinaryReservation
+                    {
+                        AnimalId = veterinaryReservation.AnimalId,
+                        VeterinaryId = veterinaryReservation.VeterinaryId,
+                        DateTime = veterinaryReservation.Time
+                    };
+                db.VeterinaryReservations.Attach(reservationToRemove);
+                db.VeterinaryReservations.Remove(reservationToRemove);
+                db.SaveChanges();
+
+                if (veterinaryReservation.DiagnosisId != null)
+                {
+                    var diagnosisToRemove =
+                        new Diagnosis { DiagnosisId = veterinaryReservation.DiagnosisId.Value };
+                    db.Diagnoses.Attach(diagnosisToRemove);
+                    db.Diagnoses.Remove(diagnosisToRemove);
+                    db.SaveChanges();
+                }
+            }
+        }
+
         public BindingList<ViewModels.Animal> GetAllAnimals()
         {
             return GetAnimals("", "", "");
@@ -193,6 +219,26 @@ namespace Zoo.DAL
             }
 
             return environments;
+        }
+
+        public BindingList<ViewModels.Medicine> GetAllMedicines()
+        {
+            BindingList<ViewModels.Medicine> medicines;
+
+            using (var db = new ZooContext())
+            {
+
+                var query = from m in db.Medicines
+                            select new ViewModels.Medicine
+                            {
+                                Id = m.MedicineId,
+                                Name = m.Name
+                            };
+
+                medicines = new BindingList<ViewModels.Medicine>(query.ToList());
+            }
+
+            return medicines;
         }
 
         public ViewModels.VeterinaryReservation AddOrUpdateVeterinaryReservation(ViewModels.VeterinaryReservation reservation)
@@ -275,21 +321,37 @@ namespace Zoo.DAL
                 db.SaveChanges();
 
 
-                List<ViewModels.Medicine> viewMedicines = veterinaryReservation.Diagnosis.Medicines.
-                       Select(m => new ViewModels.Medicine { Id = m.MedicineId, Name = m.Name, }).ToList();
+                List<ViewModels.Medicine> viewMedicines = null;
+
+                //if (veterinaryReservation.Diagnosis != null)
+                   
 
                 var viewReservation = new ViewModels.VeterinaryReservation
                 {
                     AnimalId = veterinaryReservation.AnimalId,
                     VeterinaryId = veterinaryReservation.VeterinaryId,
-                    DiagnosisId = veterinaryReservation.Diagnosis.DiagnosisId,
                     Time = veterinaryReservation.DateTime,
-                    Veterinary = veterinaryReservation.Veterinary.Name,
-                    Diagnosis = veterinaryReservation.Diagnosis.Description,
-                    Medicines = viewMedicines,
-                    MedicineNames = string.Join(", ", viewMedicines.Select(m => m.Name).ToList())
+                    Veterinary = veterinaryReservation.Veterinary.Name,                                       
                 };
 
+                if (veterinaryReservation.Diagnosis != null)
+                {
+                    viewMedicines = veterinaryReservation.Diagnosis.Medicines.
+                         Select(m => new ViewModels.Medicine { Id = m.MedicineId, Name = m.Name, }).ToList();
+
+
+                    viewReservation.Medicines = viewMedicines;
+                    viewReservation.MedicineNames = string.Join(", ", viewMedicines.Select(m => m.Name).ToList());
+
+
+                    viewReservation.DiagnosisId = veterinaryReservation.Diagnosis.DiagnosisId;
+                    viewReservation.Diagnosis = veterinaryReservation.Diagnosis.Description;
+                }
+
+                //Diagnosis = veterinaryReservation.Diagnosis != null ? veterinaryReservation.Diagnosis.Description : null,
+
+                //DiagnosisId = veterinaryReservation.Diagnosis != null ? veterinaryReservation.Diagnosis.DiagnosisId : null,
+                
                 return viewReservation;
             }
         }
