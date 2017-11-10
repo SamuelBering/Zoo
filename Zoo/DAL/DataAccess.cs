@@ -241,7 +241,29 @@ namespace Zoo.DAL
             return medicines;
         }
 
-        public ViewModels.VeterinaryReservation AddOrUpdateVeterinaryReservation(ViewModels.VeterinaryReservation reservation)
+        public BindingList<ViewModels.Veterinary> GetAllVeterinaries()
+        {
+            BindingList<ViewModels.Veterinary> veterinaries;
+
+            using (var db = new ZooContext())
+            {
+
+                var query = from v in db.Veterinaries
+                            select new ViewModels.Veterinary
+                            {
+                                Id = v.VeterinaryId,
+                                Name = v.Name
+                            };
+
+                veterinaries = new BindingList<ViewModels.Veterinary>(query.ToList());
+            }
+
+            return veterinaries;
+        }
+
+        public ViewModels.VeterinaryReservation
+                     AddOrUpdateVeterinaryReservation(ViewModels.VeterinaryReservation prevReservation,
+                                                      ViewModels.VeterinaryReservation reservation)
         {
             using (var db = new ZooContext())
             {
@@ -294,44 +316,37 @@ namespace Zoo.DAL
 
 
                 var veterinaryReservation = db.VeterinaryReservations
-                    .Where(r => r.VeterinaryId == reservation.VeterinaryId
-                                && r.AnimalId == reservation.AnimalId
-                                && r.DateTime == reservation.Time).SingleOrDefault();
+                    .Where(r => r.VeterinaryId == prevReservation.VeterinaryId
+                                && r.AnimalId == prevReservation.AnimalId
+                                && r.DateTime == prevReservation.Time).SingleOrDefault();
 
-                if (veterinaryReservation == null)
+                if (veterinaryReservation != null)
                 {
-                    veterinaryReservation = new VeterinaryReservation
-                    {
-                        Veterinary = veterinary,
-                        Animal = animal,
-                        DateTime = reservation.Time,
-                        Diagnosis = diagnosis,
-                    };
+                    db.VeterinaryReservations.Remove(veterinaryReservation);
+                    db.SaveChanges();
+                    veterinaryReservation = null;
+                }
 
-                    db.VeterinaryReservations.Add(veterinaryReservation);
-                }
-                else
+                veterinaryReservation = new VeterinaryReservation
                 {
-                    veterinaryReservation.Veterinary = veterinary;
-                    veterinaryReservation.Animal = animal;
-                    veterinaryReservation.DateTime = reservation.Time;
-                    veterinaryReservation.Diagnosis = diagnosis;
-                }
+                    Veterinary = veterinary,
+                    Animal = animal,
+                    DateTime = reservation.Time,
+                    Diagnosis = diagnosis,
+                };
+
+                db.VeterinaryReservations.Add(veterinaryReservation);
 
                 db.SaveChanges();
 
-
                 List<ViewModels.Medicine> viewMedicines = null;
-
-                //if (veterinaryReservation.Diagnosis != null)
-                   
 
                 var viewReservation = new ViewModels.VeterinaryReservation
                 {
                     AnimalId = veterinaryReservation.AnimalId,
                     VeterinaryId = veterinaryReservation.VeterinaryId,
                     Time = veterinaryReservation.DateTime,
-                    Veterinary = veterinaryReservation.Veterinary.Name,                                       
+                    Veterinary = veterinaryReservation.Veterinary.Name,
                 };
 
                 if (veterinaryReservation.Diagnosis != null)
@@ -348,10 +363,6 @@ namespace Zoo.DAL
                     viewReservation.Diagnosis = veterinaryReservation.Diagnosis.Description;
                 }
 
-                //Diagnosis = veterinaryReservation.Diagnosis != null ? veterinaryReservation.Diagnosis.Description : null,
-
-                //DiagnosisId = veterinaryReservation.Diagnosis != null ? veterinaryReservation.Diagnosis.DiagnosisId : null,
-                
                 return viewReservation;
             }
         }

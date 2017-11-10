@@ -15,7 +15,9 @@ namespace Zoo.BL
 
         int AddOrUpdateAnimal(ViewModels.Animal animal);
 
-        ViewModels.VeterinaryReservation AddOrUpdateVeterinaryReservation(ViewModels.VeterinaryReservation reservation);
+        ViewModels.VeterinaryReservation
+                     AddOrUpdateVeterinaryReservation(ViewModels.VeterinaryReservation prevReservation,
+                                                      ViewModels.VeterinaryReservation reservation);
 
         void RemoveAnimal(ViewModels.Animal animal);
 
@@ -25,6 +27,7 @@ namespace Zoo.BL
 
         BindingList<ViewModels.Medicine> GetAllMedicines();
 
+        BindingList<ViewModels.Veterinary> GetAllVeterinaries();
 
     }
 }

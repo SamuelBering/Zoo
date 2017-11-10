@@ -170,6 +170,7 @@
     <Compile Include="ViewModels\Environment.cs" />
     <Compile Include="ViewModels\Medicine.cs" />
     <Compile Include="ViewModels\Spieces.cs" />
+    <Compile Include="ViewModels\Veterinary.cs" />
     <Compile Include="ViewModels\VeterinaryReservation.cs" />
     <EmbeddedResource Include="Migrations\201711031224428_initial.resx">
       <DependentUpon>201711031224428_initial.cs</DependentUpon>

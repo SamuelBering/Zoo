@@ -63,24 +63,9 @@ namespace Zoo.UI
                 }
 
 
-                reservation.Update(zoo.AddOrUpdateVeterinaryReservation(reservation));
+                reservation.Update(zoo.AddOrUpdateVeterinaryReservation(reservation, reservation));
                 dataGridView.Refresh();
-                //if ((int)dataGridView[0, e.RowIndex].Value == 0)
-
-
-                //if ((int)dataGridView[0, e.RowIndex].Value == 0)
-                //{
-                //    //if (columnName == "name" || columnName == "weight" || columnName == "spieces" ||
-                //    //    columnName == "countryoforigin")
-                //    //    AddNewAnimalFromNameWeightSpiecesOrCountry(dataGridView, e, columnName, newValue);
-                //}
-                //else
-                //{
-                //    if (columnName == "name" || columnName == "weight" || columnName == "spieces" ||
-                //        columnName == "countryoforigin")
-                //        UpdateAnimalFromNameWeightSpiecesOrCountry(dataGridView, e, columnName, newValue);
-
-                //}
+                
             }
         }
 
@@ -122,9 +107,6 @@ namespace Zoo.UI
                     listBoxForm.ListBox.SetSelected(i, false);
             }
 
-
-
-
             if (listBoxForm.ShowDialog(this) == DialogResult.OK)
             {
                 reservation.Medicines = new List<Medicine>();
@@ -138,20 +120,32 @@ namespace Zoo.UI
                 }
             }
 
+            listBoxForm.Dispose();
+        }
 
 
-            //foreach (var item in this.typeComboBox.Items)
-            //    dropDownListForm.DropDownComboBox.Items.Add(item);
+        private void GetVeterinaryAndUpdateReservation(DataGridView dataGridView, DataGridViewCellEventArgs e,
+                                         VeterinaryReservation reservation)
+        {
+            DropDownListForm dropDownListForm = new DropDownListForm();
+
+            dropDownListForm.DropDownComboBox.DataSource = zoo.GetAllVeterinaries();
+            dropDownListForm.DropDownComboBox.DisplayMember = "Name";
+            dropDownListForm.DropDownComboBox.ValueMember = "Id";
+
+            dropDownListForm.DropDownComboBox.SelectedValue = reservation.VeterinaryId;
 
             //dropDownListForm.DropDownComboBox.Text = (string)dataGridView[e.ColumnIndex, e.RowIndex].Value;
+            if (dropDownListForm.ShowDialog(this) == DialogResult.OK)
+            {
+                Veterinary selectedVeterinary =
+                    (Veterinary)dropDownListForm.DropDownComboBox.SelectedItem;
 
-            //if (dropDownListForm.ShowDialog(this) == DialogResult.OK)
-            //{
-            //    var selectedItem = dropDownListForm.DropDownComboBox.SelectedItem;
-            //    animal.Type = selectedItem != null ? (string)selectedItem : null;
-            //}
+                reservation.Veterinary = selectedVeterinary.Name;
+                reservation.VeterinaryId = selectedVeterinary.Id;
+            }
 
-            listBoxForm.Dispose();
+            dropDownListForm.Dispose();
         }
 
         private void reservationsDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -187,20 +181,21 @@ namespace Zoo.UI
                     dataGridView[e.ColumnIndex, e.RowIndex].Selected = true;
                 }
 
+                VeterinaryReservation previousReservation = new VeterinaryReservation();
+                
                 VeterinaryReservation reservation =
                     (VeterinaryReservation)dataGridView.Rows[e.RowIndex].DataBoundItem;
 
+                previousReservation.Update(reservation);
+
                 if (columnName == "medicines")
                     GetMedicinesAndUpdateReservation(dataGridView, e, reservation);
-                //else if (columnName == "environment")
-                //    GetEnvironmentAndUpdateAnimal(dataGridView, e, animal);
-                //else if (columnName == "parent1")
-                //    GetParent1AndUpdateAnimal(dataGridView, e, animal);
-                //else if (columnName == "parent2")
-                //    GetParent2AndUpdateAnimal(dataGridView, e, animal);
+                else if (columnName == "veterinary")
+                    GetVeterinaryAndUpdateReservation(dataGridView, e, reservation);
 
-                reservation.Update(zoo.AddOrUpdateVeterinaryReservation(reservation));
+                reservation.Update(zoo.AddOrUpdateVeterinaryReservation(previousReservation, reservation));
                 dataGridView.Refresh();
+                //LoadAllReservations();
             }
         }
     }

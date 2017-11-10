@@ -26,9 +26,12 @@ namespace Zoo.BL
             return dataAccess.AddOrUpdateAnimal(animal);
         }
 
-        public ViewModels.VeterinaryReservation AddOrUpdateVeterinaryReservation(ViewModels.VeterinaryReservation reservation)
+        public ViewModels.VeterinaryReservation
+                     AddOrUpdateVeterinaryReservation(ViewModels.VeterinaryReservation prevReservation,
+                                                      ViewModels.VeterinaryReservation reservation)
         {
-            return dataAccess.AddOrUpdateVeterinaryReservation(reservation);
+            return dataAccess.AddOrUpdateVeterinaryReservation(prevReservation, reservation);
+
         }
 
         public BindingList<ViewModels.Animal> GetAllAnimals()
@@ -68,5 +71,11 @@ namespace Zoo.BL
         {
             return dataAccess.GetAllMedicines();
         }
+
+        public BindingList<ViewModels.Veterinary> GetAllVeterinaries()
+        {
+            return dataAccess.GetAllVeterinaries();
+        }
+
     }
 }
