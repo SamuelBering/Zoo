@@ -36,6 +36,9 @@ namespace Zoo.DBContext
                     m.ToTable("ChildParentAnimals");
                 }
                 );
+
+            modelBuilder.Entity<VeterinaryReservation>().Property(p => p.DateTime)
+                        .HasColumnType("datetime2");
         }
 
 

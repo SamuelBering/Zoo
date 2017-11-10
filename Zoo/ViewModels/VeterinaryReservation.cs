@@ -16,5 +16,17 @@ namespace Zoo.ViewModels
         public string Diagnosis { get; set; }
         public string MedicineNames { get; set; }
         public List<Medicine> Medicines { get; set; }
+
+        public void Update(VeterinaryReservation r)
+        {
+            this.AnimalId = r.AnimalId;
+            this.VeterinaryId = r.VeterinaryId;
+            this.Time = r.Time;
+            this.DiagnosisId = r.DiagnosisId;
+            this.Veterinary = r.Veterinary;
+            this.Diagnosis = r.Diagnosis;
+            this.MedicineNames = r.MedicineNames;
+            this.Medicines = r.Medicines;
+        }
     }
 }

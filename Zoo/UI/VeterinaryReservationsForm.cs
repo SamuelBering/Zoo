@@ -42,11 +42,17 @@ namespace Zoo.UI
 
             if (columnName == "diagnosis" && reservation != null)
             {
-                reservation.AnimalId = this.animalId;
-                reservation.VeterinaryId = 2;
-                reservation.Time = new DateTime(1978, 08, 10);
-                zoo.AddOrUpdateVeterinaryReservation(reservation);
 
+                if (reservation.AnimalId == 0)
+                {
+                    reservation.AnimalId = this.animalId;
+                    reservation.VeterinaryId = 1;
+                    reservation.Time = DateTime.Now;
+                }
+
+
+                reservation.Update(zoo.AddOrUpdateVeterinaryReservation(reservation));
+                dataGridView.Refresh();
                 //if ((int)dataGridView[0, e.RowIndex].Value == 0)
 
 

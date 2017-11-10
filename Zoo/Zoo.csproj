@@ -134,6 +134,10 @@
     <Compile Include="Migrations\201711091022267_AddMedicineClass.Designer.cs">
       <DependentUpon>201711091022267_AddMedicineClass.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711100622336_ChangeToDateTime2.cs" />
+    <Compile Include="Migrations\201711100622336_ChangeToDateTime2.Designer.cs">
+      <DependentUpon>201711100622336_ChangeToDateTime2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="BL\Zoo.cs" />
     <Compile Include="UI\DropDownListForm.cs">
@@ -211,6 +215,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711091022267_AddMedicineClass.resx">
       <DependentUpon>201711091022267_AddMedicineClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711100622336_ChangeToDateTime2.resx">
+      <DependentUpon>201711100622336_ChangeToDateTime2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

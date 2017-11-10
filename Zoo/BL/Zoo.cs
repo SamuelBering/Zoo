@@ -26,9 +26,9 @@ namespace Zoo.BL
             return dataAccess.AddOrUpdateAnimal(animal);
         }
 
-        public void AddOrUpdateVeterinaryReservation(ViewModels.VeterinaryReservation reservation)
+        public ViewModels.VeterinaryReservation AddOrUpdateVeterinaryReservation(ViewModels.VeterinaryReservation reservation)
         {
-            dataAccess.AddOrUpdateVeterinaryReservation(reservation);
+            return dataAccess.AddOrUpdateVeterinaryReservation(reservation);
         }
 
         public BindingList<ViewModels.Animal> GetAllAnimals()
