@@ -15,6 +15,8 @@ namespace Zoo.BL
 
         int AddOrUpdateAnimal(ViewModels.Animal animal);
 
+        void AddOrUpdateVeterinaryReservation(ViewModels.VeterinaryReservation reservation);
+
         void RemoveAnimal(ViewModels.Animal animal);
 
         BindingList<ViewModels.VeterinaryReservation> GetVeterinaryReservations(int animalId);

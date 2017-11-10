@@ -25,10 +25,27 @@ namespace Zoo.DAL
 
                         Veterinary=new Veterinary
                         {
-                            Name="Rochi Ardulla"
+                            Name="Henrik Claesson"
                         },
 
-                        DateTime=DateTime.Now
+                        DateTime=new DateTime(2017,12,01),
+
+                        Diagnosis=new Diagnosis
+                        {
+                            Description="Utslag och prickar, sannolikt vattkoppor",
+                            Medicines=new List<Medicine>
+                            {
+                                new Medicine
+                                {
+                                    Name="Alvedon",
+                                },
+                                new Medicine
+                                {
+                                    Name="Penicillin"
+                                }
+                            },
+                        }
+
                     }
                 };
 
@@ -43,28 +60,29 @@ namespace Zoo.DAL
             using (var db = new ZooContext())
             {
                 var reservationsTemp = (from r in db.VeterinaryReservations
-                             where r.AnimalId == animalId                             
-                             select new
-                             {
-                                 VeterinaryReservation = new ViewModels.VeterinaryReservation
-                                 {
-                                     AnimalId = r.AnimalId,
-                                     VeterinaryId = r.VeterinaryId,
-                                     Time = r.DateTime,
-                                     Veterinary = r.Veterinary.Name,
-                                     Diagnosis = r.Diagnosis.Description
-                                 },
+                                        where r.AnimalId == animalId
+                                        select new
+                                        {
+                                            VeterinaryReservation = new ViewModels.VeterinaryReservation
+                                            {
+                                                AnimalId = r.AnimalId,
+                                                VeterinaryId = r.VeterinaryId,
+                                                DiagnosisId = r.Diagnosis.DiagnosisId,
+                                                Time = r.DateTime,
+                                                Veterinary = r.Veterinary.Name,
+                                                Diagnosis = r.Diagnosis.Description
+                                            },
 
-                                 Medicines = r.Diagnosis.Medicines
-                             }).ToList();
+                                            Medicines = r.Diagnosis.Medicines
+                                        }).ToList();
 
                 var query = reservationsTemp.Select(r =>
                 {
-                    List<ViewModels.Medicine> medicines =  r.Medicines.
+                    List<ViewModels.Medicine> medicines = r.Medicines.
                         Select(m => new ViewModels.Medicine { Id = m.MedicineId, Name = m.Name, }).ToList();
                     ViewModels.VeterinaryReservation veterinaryReservation = r.VeterinaryReservation;
                     veterinaryReservation.Medicines = medicines;
-                    veterinaryReservation.MedicineNames = 
+                    veterinaryReservation.MedicineNames =
                         string.Join(", ", medicines.Select(m => m.Name).ToList());
                     return veterinaryReservation;
                 });
@@ -175,6 +193,81 @@ namespace Zoo.DAL
             }
 
             return environments;
+        }
+
+        public void AddOrUpdateVeterinaryReservation(ViewModels.VeterinaryReservation reservation)
+        {
+            using (var db = new ZooContext())
+            {
+                var animal = db.Animals.Where(a => a.AnimalId == reservation.AnimalId).Single();
+
+                var diagnosis = db.Diagnoses.Where(d => d.DiagnosisId == reservation.DiagnosisId).SingleOrDefault();
+                if (diagnosis == null && reservation.Diagnosis != null)
+                    diagnosis = new Diagnosis
+                    {
+                        Description = reservation.Diagnosis,
+                    };
+
+
+
+                var veterinary = db.Veterinaries.Where
+                    (v => v.VeterinaryId == reservation.VeterinaryId).SingleOrDefault();
+                if (veterinary == null)
+                    veterinary = new Veterinary
+                    {
+                        Name = reservation.Veterinary,
+                    };
+
+
+                List<Medicine> medicines = new List<Medicine>();
+                if (reservation.Medicines != null)
+                    foreach (ViewModels.Medicine medicine in reservation.Medicines)
+                    {
+                        var newMedicine = db.Medicines.Where(m => m.MedicineId == medicine.Id).SingleOrDefault();
+
+                        if (newMedicine != null)
+                            medicines.Add(newMedicine);
+                    }
+
+
+
+                if (diagnosis != null && diagnosis.Medicines != null && diagnosis.Medicines.Count > 0)
+                {
+                    diagnosis.Medicines.Clear();
+                    db.SaveChanges();
+                }
+
+                if (diagnosis != null && medicines.Count > 0)
+                    diagnosis.Medicines = medicines;
+
+
+                var veterinaryReservation = db.VeterinaryReservations
+                    .Where(r => r.VeterinaryId == reservation.VeterinaryId
+                                && r.AnimalId == reservation.AnimalId
+                                && r.DateTime == reservation.Time).SingleOrDefault();
+
+                if (veterinaryReservation == null)
+                {
+                    veterinaryReservation = new VeterinaryReservation
+                    {
+                        Veterinary = veterinary,
+                        Animal = animal,
+                        DateTime = reservation.Time,
+                        Diagnosis = diagnosis,
+                    };
+
+                    db.VeterinaryReservations.Add(veterinaryReservation);
+                }
+                else
+                {
+                    veterinaryReservation.Veterinary = veterinary;
+                    veterinaryReservation.Animal = animal;
+                    veterinaryReservation.DateTime = reservation.Time;
+                    veterinaryReservation.Diagnosis = diagnosis;
+                }
+
+                db.SaveChanges();
+            }
         }
 
         public int AddOrUpdateAnimal(ViewModels.Animal animal)

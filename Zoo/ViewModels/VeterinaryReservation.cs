@@ -11,6 +11,7 @@ namespace Zoo.ViewModels
         public int AnimalId { get; set; }
         public int VeterinaryId { get; set; }
         public DateTime Time { get; set; }
+        public int? DiagnosisId { get; set; }
         public string Veterinary { get; set; }
         public string Diagnosis { get; set; }
         public string MedicineNames { get; set; }

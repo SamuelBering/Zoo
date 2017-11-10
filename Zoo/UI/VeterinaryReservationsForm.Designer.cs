@@ -40,6 +40,7 @@
             this.reservationsDataGridView.RowTemplate.Height = 24;
             this.reservationsDataGridView.Size = new System.Drawing.Size(870, 297);
             this.reservationsDataGridView.TabIndex = 0;
+            this.reservationsDataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.reservationsDataGridView_CellEndEdit);
             // 
             // VeterinaryReservationsForm
             // 

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Zoo.BL;
+using Zoo.ViewModels;
 
 namespace Zoo.UI
 {
@@ -27,6 +28,42 @@ namespace Zoo.UI
         private void LoadAllReservations()
         {
             reservationsDataGridView.DataSource = zoo.GetVeterinaryReservations(animalId);
+        }
+
+        private void reservationsDataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridView dataGridView = (DataGridView)sender;
+
+            var newValue = dataGridView[e.ColumnIndex, e.RowIndex].Value;
+            var columnName = dataGridView.Columns[e.ColumnIndex].HeaderText.ToLower();
+
+            VeterinaryReservation reservation =
+                (VeterinaryReservation)dataGridView.Rows[e.RowIndex].DataBoundItem;
+
+            if (columnName == "diagnosis" && reservation != null)
+            {
+                reservation.AnimalId = this.animalId;
+                reservation.VeterinaryId = 2;
+                reservation.Time = new DateTime(1978, 08, 10);
+                zoo.AddOrUpdateVeterinaryReservation(reservation);
+
+                //if ((int)dataGridView[0, e.RowIndex].Value == 0)
+
+
+                //if ((int)dataGridView[0, e.RowIndex].Value == 0)
+                //{
+                //    //if (columnName == "name" || columnName == "weight" || columnName == "spieces" ||
+                //    //    columnName == "countryoforigin")
+                //    //    AddNewAnimalFromNameWeightSpiecesOrCountry(dataGridView, e, columnName, newValue);
+                //}
+                //else
+                //{
+                //    if (columnName == "name" || columnName == "weight" || columnName == "spieces" ||
+                //        columnName == "countryoforigin")
+                //        UpdateAnimalFromNameWeightSpiecesOrCountry(dataGridView, e, columnName, newValue);
+
+                //}
+            }
         }
     }
 }
