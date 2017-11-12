@@ -33,5 +33,10 @@ namespace Zoo.UI
             
         }
 
+        private void DropDownListForm_Load(object sender, EventArgs e)
+        {
+            this.Location = new System.Drawing.Point(Cursor.Position.X - this.Size.Width / 2,
+                Cursor.Position.Y - this.Size.Height / 2);
+        }
     }
 }

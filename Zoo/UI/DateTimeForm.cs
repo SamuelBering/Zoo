@@ -11,9 +11,12 @@ namespace Zoo.UI
         IZoo zoo;
         DateTime previousDateTime;
 
+        public bool DateTimePickerValueChanged { get; set; }
+
         public DateTimeForm(VeterinaryReservation veterinaryReservation, IZoo zoo)
         {
             InitializeComponent();
+            this.DateTimePickerValueChanged = false;
             this.veterinaryReservation = veterinaryReservation;
             this.zoo = zoo;
 
@@ -56,9 +59,18 @@ namespace Zoo.UI
                     dp.Value = this.previousDateTime;
                 }
                 else
+                {
                     this.previousDateTime = dp.Value;
+                    DateTimePickerValueChanged = true;
+                }
             }
 
+        }
+
+        private void DateTimeForm_Load(object sender, EventArgs e)
+        {
+            this.Location = new System.Drawing.Point(Cursor.Position.X - this.Size.Width / 2,
+                Cursor.Position.Y - this.Size.Height / 2);
         }
     }
 }

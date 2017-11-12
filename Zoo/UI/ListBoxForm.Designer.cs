@@ -72,6 +72,7 @@
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.multipleListBox);
             this.Name = "ListBoxForm";
+            this.Load += new System.EventHandler(this.ListBoxForm_Load);
             this.ResumeLayout(false);
 
         }

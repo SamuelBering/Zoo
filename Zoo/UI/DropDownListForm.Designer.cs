@@ -71,6 +71,7 @@
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.dropDownComboBox);
             this.Name = "DropDownListForm";
+            this.Load += new System.EventHandler(this.DropDownListForm_Load);
             this.ResumeLayout(false);
 
         }

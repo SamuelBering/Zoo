@@ -73,6 +73,7 @@
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.dateTimePicker);
             this.Name = "DateTimeForm";
+            this.Load += new System.EventHandler(this.DateTimeForm_Load);
             this.ResumeLayout(false);
 
         }

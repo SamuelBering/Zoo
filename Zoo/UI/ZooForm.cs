@@ -19,11 +19,6 @@ namespace Zoo
             InitializeComponent();
             LoadAllEnvironments();
             LoadAllAnimals();
-            //zoo.RemoveAnimal(new Animal { Id = 28 });
-
-            //zoo.AddOrUpdateVeterinaryReservation(new VeterinaryReservation { AnimalId = 28, DiagnosisId = 1 });
-            //zoo.GetVeterinaryReservations(28);
-            //zoo.SeedDataBase();
         }
 
         private void InitializeResultDataGridColumns()

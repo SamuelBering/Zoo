@@ -160,7 +160,7 @@ namespace Zoo.UI
 
             if (dateTimeForm.ShowDialog(this) == DialogResult.OK)
             {
-                if (dateTimeForm.DateTimePicker.Value != reservation.Time)
+                if (dateTimeForm.DateTimePickerValueChanged)
                 {
                     reservation.Time = dateTimeForm.DateTimePicker.Value;
                 }
