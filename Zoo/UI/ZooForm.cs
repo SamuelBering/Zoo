@@ -256,7 +256,8 @@ namespace Zoo
 
         private void resultDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex < 0)
+
+            if (e.ColumnIndex < 0 || e.RowIndex < 0)
                 return;
 
             DataGridView dataGridView = (DataGridView)sender;

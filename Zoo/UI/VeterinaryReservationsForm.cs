@@ -57,8 +57,9 @@ namespace Zoo.UI
 
                 if (reservation.AnimalId == 0)
                 {
+                    
                     reservation.AnimalId = this.animalId;
-                    reservation.VeterinaryId = 1;
+                    reservation.VeterinaryId = (zoo.GetAllVeterinaries())[0].Id;
                     reservation.Time = DateTime.Now;
                 }
 
@@ -171,7 +172,7 @@ namespace Zoo.UI
 
         private void reservationsDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex < 0)
+            if (e.ColumnIndex < 0 || e.RowIndex < 0)
                 return;
 
             DataGridView dataGridView = (DataGridView)sender;
@@ -191,7 +192,7 @@ namespace Zoo.UI
                     reservations.Add(new VeterinaryReservation
                     {
                         AnimalId = this.animalId,
-                        VeterinaryId = 1,
+                        VeterinaryId = (zoo.GetAllVeterinaries())[0].Id,
                         Time = DateTime.Now
                     });
 
