@@ -9,12 +9,15 @@ namespace Zoo.ViewModels
 {
     public class VeterinaryReservation
     {
+        [Browsable(false)]
         public int AnimalId { get; set; }
+        [Browsable(false)]
         public int VeterinaryId { get; set; }
 
         [ReadOnly(true)]
         public DateTime Time { get; set; }
 
+        [Browsable(false)]
         public int? DiagnosisId { get; set; }
 
         [ReadOnly(true)]

@@ -77,5 +77,10 @@ namespace Zoo.BL
             return dataAccess.GetAllVeterinaries();
         }
 
+        public bool VeterinaryReservationExists(ViewModels.VeterinaryReservation reservationViewModel)
+        {
+            return dataAccess.VeterinaryReservationExists(reservationViewModel);
+        }
+
     }
 }

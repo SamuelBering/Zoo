@@ -65,7 +65,7 @@ namespace Zoo.UI
 
                 reservation.Update(zoo.AddOrUpdateVeterinaryReservation(reservation, reservation));
                 dataGridView.Refresh();
-                
+
             }
         }
 
@@ -127,13 +127,18 @@ namespace Zoo.UI
         private void GetVeterinaryAndUpdateReservation(DataGridView dataGridView, DataGridViewCellEventArgs e,
                                          VeterinaryReservation reservation)
         {
-            DropDownListForm dropDownListForm = new DropDownListForm();
+            DropDownListVeterinaryForm dropDownListForm = 
+                new DropDownListVeterinaryForm(reservation, this.zoo);
+
 
             dropDownListForm.DropDownComboBox.DataSource = zoo.GetAllVeterinaries();
             dropDownListForm.DropDownComboBox.DisplayMember = "Name";
             dropDownListForm.DropDownComboBox.ValueMember = "Id";
 
+
             dropDownListForm.DropDownComboBox.SelectedValue = reservation.VeterinaryId;
+
+            dropDownListForm.SelectedValueChangeOn = true;
 
             //dropDownListForm.DropDownComboBox.Text = (string)dataGridView[e.ColumnIndex, e.RowIndex].Value;
             if (dropDownListForm.ShowDialog(this) == DialogResult.OK)
@@ -146,6 +151,22 @@ namespace Zoo.UI
             }
 
             dropDownListForm.Dispose();
+        }
+
+        private void GetTimeAndUpdateReservation(DataGridView dataGridView, DataGridViewCellEventArgs e,
+                                         VeterinaryReservation reservation)
+        {
+            DateTimeForm dateTimeForm = new DateTimeForm(reservation, this.zoo);
+
+            if (dateTimeForm.ShowDialog(this) == DialogResult.OK)
+            {
+                if (dateTimeForm.DateTimePicker.Value != reservation.Time)
+                {
+                    reservation.Time = dateTimeForm.DateTimePicker.Value;
+                }
+            }
+
+            dateTimeForm.Dispose();
         }
 
         private void reservationsDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -182,7 +203,7 @@ namespace Zoo.UI
                 }
 
                 VeterinaryReservation previousReservation = new VeterinaryReservation();
-                
+
                 VeterinaryReservation reservation =
                     (VeterinaryReservation)dataGridView.Rows[e.RowIndex].DataBoundItem;
 
@@ -192,8 +213,10 @@ namespace Zoo.UI
                     GetMedicinesAndUpdateReservation(dataGridView, e, reservation);
                 else if (columnName == "veterinary")
                     GetVeterinaryAndUpdateReservation(dataGridView, e, reservation);
+                else if (columnName == "time")
+                    GetTimeAndUpdateReservation(dataGridView, e, reservation);
 
-                reservation.Update(zoo.AddOrUpdateVeterinaryReservation(previousReservation, reservation));
+                    reservation.Update(zoo.AddOrUpdateVeterinaryReservation(previousReservation, reservation));
                 dataGridView.Refresh();
                 //LoadAllReservations();
             }

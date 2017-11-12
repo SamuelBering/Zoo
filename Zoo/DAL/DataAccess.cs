@@ -241,6 +241,23 @@ namespace Zoo.DAL
             return medicines;
         }
 
+
+        public bool VeterinaryReservationExists(ViewModels.VeterinaryReservation reservationViewModel)
+        {
+            using (var db = new ZooContext())
+            {
+                VeterinaryReservation veterinaryReservation = db.VeterinaryReservations
+                      .SingleOrDefault(r => r.AnimalId == reservationViewModel.AnimalId
+                      && r.VeterinaryId == reservationViewModel.VeterinaryId
+                      && r.DateTime == reservationViewModel.Time);
+
+                if (veterinaryReservation != null)
+                    return true;
+                else
+                    return false;
+            }
+        }
+
         public BindingList<ViewModels.Veterinary> GetAllVeterinaries()
         {
             BindingList<ViewModels.Veterinary> veterinaries;

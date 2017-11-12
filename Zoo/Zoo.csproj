@@ -140,11 +140,20 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="BL\Zoo.cs" />
+    <Compile Include="UI\DateTimeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\DateTimeForm.Designer.cs">
+      <DependentUpon>DateTimeForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\DropDownListForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\DropDownListForm.Designer.cs">
       <DependentUpon>DropDownListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\DropDownListVeterinaryForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\ListBoxForm.cs">
       <SubType>Form</SubType>
@@ -235,6 +244,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UI\DateTimeForm.resx">
+      <DependentUpon>DateTimeForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\DropDownListForm.resx">
       <DependentUpon>DropDownListForm.cs</DependentUpon>
     </EmbeddedResource>

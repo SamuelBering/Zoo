@@ -29,5 +29,7 @@ namespace Zoo.BL
 
         BindingList<ViewModels.Veterinary> GetAllVeterinaries();
 
+        bool VeterinaryReservationExists(ViewModels.VeterinaryReservation reservationViewModel);
+
     }
 }

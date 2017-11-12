@@ -32,7 +32,7 @@ namespace Zoo
             resultDataGridView.Columns["Environment"].ReadOnly = true;
             resultDataGridView.Columns["Parent1"].ReadOnly = true;
             resultDataGridView.Columns["Parent2"].ReadOnly = true;
-            //resultDataGridView.Columns["Id"].Visible = false;
+            resultDataGridView.Columns["Id"].Visible = false;
             resultDataGridView.Columns["Parent1Id"].Visible = false;
             resultDataGridView.Columns["Parent2Id"].Visible = false;
         }

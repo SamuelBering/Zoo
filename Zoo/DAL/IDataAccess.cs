@@ -33,5 +33,8 @@ namespace Zoo.DAL
 
         BindingList<ViewModels.Veterinary> GetAllVeterinaries();
 
+        bool VeterinaryReservationExists(ViewModels.VeterinaryReservation reservationViewModel);
+
+
     }
 }
